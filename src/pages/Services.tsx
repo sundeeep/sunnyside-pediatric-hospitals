@@ -13,6 +13,7 @@ import chronicDiseaseCareImage from "@/assets/services/chronic-disease-care.png"
 import developmentalScreeningImage from "@/assets/services/developmental-screening.png";
 import labServicesImage from "@/assets/services/lab-services.png";
 import televisitsImage from "@/assets/services/televisits.png";
+import referralsImage from "@/assets/services/referrals.png";
 
 // Premium services with full content
 const premiumServices = [
@@ -82,16 +83,16 @@ const premiumServices = [
     description: "TeleVisits let parents consult our pediatric team without coming to the clinic for non-urgent needs. It offers convenience and quick guidance. Ideal for follow-ups, minor concerns, or parental questions.",
     thumbnail: televisitsImage,
   },
+  {
+    title: "Referrals to Specialists",
+    tagline: "Expert care when needed.",
+    description: "If a child needs specialized evaluation or treatment, we coordinate referrals to trusted pediatric specialists. We support families through the process. We ensure continuity of care and follow-up.",
+    thumbnail: referralsImage,
+  },
 ];
 
 // Other services with simple flip cards
 const services = [
-  {
-    icon: "🏥",
-    title: "Referrals to Specialists",
-    subtitle: "Connected care network",
-    summary: "Guidance and referral to pediatric specialists.",
-  },
   {
     icon: "📖",
     title: "Parent Education",
