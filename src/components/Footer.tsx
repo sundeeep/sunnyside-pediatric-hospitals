@@ -17,7 +17,7 @@ const Footer = () => {
                 className="h-12 w-auto"
               />
             </div>
-            <p className="font-body text-sm text-background/70 leading-relaxed">
+            <p className="font-body text-sm text-primary/70 leading-relaxed">
               Providing compassionate, expert pediatric care for families in our
               community since 2005.
             </p>
@@ -25,7 +25,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-heading font-semibold text-background mb-4">
+            <h4 className="font-heading font-semibold text-primary mb-4">
               Quick Links
             </h4>
             <nav className="space-y-2">
@@ -34,7 +34,7 @@ const Footer = () => {
                   <a
                     key={link}
                     href={`#${link.toLowerCase().replace(" ", "-")}`}
-                    className="block font-body text-sm text-background/70 hover:text-primary transition-colors"
+                    className="block font-body text-sm text-primary/70 hover:text-primary transition-colors"
                   >
                     {link}
                   </a>
@@ -45,25 +45,25 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="font-heading font-semibold text-background mb-4">
+            <h4 className="font-heading font-semibold text-primary mb-4">
               Contact Us
             </h4>
             <div className="space-y-3">
               <a
                 href="tel:555-123-4567"
-                className="flex items-center gap-3 font-body text-sm text-background/70 hover:text-primary transition-colors"
+                className="flex items-center gap-3 font-body text-sm text-primary/70 hover:text-primary transition-colors"
               >
                 <Phone className="w-4 h-4" />
                 (555) 123-4567
               </a>
               <a
                 href="mailto:info@sunnysidepeds.com"
-                className="flex items-center gap-3 font-body text-sm text-background/70 hover:text-primary transition-colors"
+                className="flex items-center gap-3 font-body text-sm text-primary/70 hover:text-primary transition-colors"
               >
                 <Mail className="w-4 h-4" />
                 info@sunnysidepeds.com
               </a>
-              <div className="flex items-start gap-3 font-body text-sm text-background/70">
+              <div className="flex items-start gap-3 font-body text-sm text-primary/70">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
                 <span>
                   123 Sunshine Blvd, Suite 200
@@ -75,8 +75,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-background/20 pt-6">
-          <p className="font-body text-sm text-background/50 text-center">
+        <div className="border-t border-primary/20 pt-6">
+          <p className="font-body text-sm text-primary/50 text-center">
             © {currentYear} Sunnyside Pediatrics. All rights reserved.
           </p>
         </div>
