@@ -149,17 +149,14 @@ const ProviderCardPremium = ({
               {/* More Details Button */}
               <button
                 onClick={() => setIsDetailOpen(true)}
-                className="mt-4 w-full rounded-xl font-body text-sm font-medium text-white/90 transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer"
+                className="mt-4 w-full rounded-xl font-body text-sm font-medium text-white/90 transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer flex items-center justify-center gap-2 py-3 px-4"
                 style={{
                   background: `linear-gradient(135deg, hsl(var(${accentVar}) / 0.3) 0%, hsl(var(${accentVar}) / 0.15) 100%)`,
                   border: `1px solid hsl(var(${accentVar}) / 0.4)`,
-                  padding: 0,
                 }}
               >
-                <span className="w-full h-full flex items-center justify-center gap-2 py-3 px-4">
-                  More Details
-                  <ChevronUp className="w-4 h-4" />
-                </span>
+                More Details
+                <ChevronUp className="w-4 h-4" />
               </button>
             </div>
           </div>
