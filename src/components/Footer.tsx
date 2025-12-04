@@ -14,7 +14,7 @@ const Footer = () => {
               <img 
                 src={logo} 
                 alt="Sunnyside Pediatrics" 
-                className="h-12 w-auto brightness-0 invert"
+                className="h-12 w-auto"
               />
             </div>
             <p className="font-body text-sm text-background/70 leading-relaxed">
