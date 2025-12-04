@@ -5,6 +5,7 @@ import ProvidersSection from "@/components/ProvidersSection";
 import ServicesSection from "@/components/ServicesSection";
 import DocumentsSection from "@/components/DocumentsSection";
 import Footer from "@/components/Footer";
+import BackToTop from "@/components/BackToTop";
 
 const Index = () => {
   return (
@@ -18,6 +19,7 @@ const Index = () => {
         <DocumentsSection />
       </main>
       <Footer />
+      <BackToTop />
     </div>
   );
 };
