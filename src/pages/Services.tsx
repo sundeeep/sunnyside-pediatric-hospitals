@@ -12,6 +12,7 @@ import sportsPhysicalsImage from "@/assets/services/sports-physicals.png";
 import chronicDiseaseCareImage from "@/assets/services/chronic-disease-care.png";
 import developmentalScreeningImage from "@/assets/services/developmental-screening.png";
 import labServicesImage from "@/assets/services/lab-services.png";
+import televisitsImage from "@/assets/services/televisits.png";
 
 // Premium services with full content
 const premiumServices = [
@@ -75,16 +76,16 @@ const premiumServices = [
     description: "We provide basic lab testing onsite for quick screening or diagnosis. Results help guide treatment decisions without delay. This ensures efficient, coordinated care under one roof.",
     thumbnail: labServicesImage,
   },
+  {
+    title: "TeleVisits",
+    tagline: "Care from home.",
+    description: "TeleVisits let parents consult our pediatric team without coming to the clinic for non-urgent needs. It offers convenience and quick guidance. Ideal for follow-ups, minor concerns, or parental questions.",
+    thumbnail: televisitsImage,
+  },
 ];
 
 // Other services with simple flip cards
 const services = [
-  {
-    icon: "📱",
-    title: "TeleVisits",
-    subtitle: "Virtual care from home",
-    summary: "Virtual appointments for non-urgent care needs.",
-  },
   {
     icon: "🏥",
     title: "Referrals to Specialists",
