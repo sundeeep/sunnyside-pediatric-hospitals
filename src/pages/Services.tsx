@@ -4,6 +4,7 @@ import ServiceFlipCard from "@/components/ServiceFlipCard";
 import ServiceCardPremium from "@/components/ServiceCardPremium";
 import primaryCareImage from "@/assets/services/primary-care.png";
 import newbornCareImage from "@/assets/services/newborn-care.png";
+import wellChecksImage from "@/assets/services/well-checks.png";
 
 // Premium services with full content
 const premiumServices = [
@@ -19,16 +20,16 @@ const premiumServices = [
     description: "Our newborn care includes assessments of growth, feeding, reflexes and general health. We support parents with guidance on feeding, sleep, and early developmental milestones. Your baby's first days get careful attention and warmth.",
     thumbnail: newbornCareImage,
   },
+  {
+    title: "Well Checks",
+    tagline: "Check-ups for healthy growth.",
+    description: "Well-check visits track your child's physical growth, hearing, vision and developmental milestones. Regular wellness exams help catch issues early and reinforce healthy habits. Immunizations and preventive guidance are part of each visit.",
+    thumbnail: wellChecksImage,
+  },
 ];
 
 // Other services with simple flip cards
 const services = [
-  {
-    icon: "📋",
-    title: "Well Checks",
-    subtitle: "Routine wellness exams",
-    summary: "Growth tracking and routine wellness exams.",
-  },
   {
     icon: "🤒",
     title: "Sick Visits",
