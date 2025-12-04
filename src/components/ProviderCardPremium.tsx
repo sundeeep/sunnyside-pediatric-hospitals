@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { ChevronUp, X, Calendar } from "lucide-react";
+import { ChevronUp, X } from "lucide-react";
 
 interface ProviderCardPremiumProps {
   name: string;
@@ -204,68 +203,31 @@ const ProviderCardPremium = ({
           />
 
           {/* Bio Content on Blurred Image */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
-            {/* Decorative Sun Rays */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-24 opacity-40">
-              <div
-                className="w-full h-full"
-                style={{
-                  background: `radial-gradient(ellipse at center bottom, hsl(var(${accentVar})) 0%, transparent 70%)`,
-                }}
-              />
-            </div>
-
+          <div className="absolute inset-0 flex items-center justify-center p-8">
             {/* Close Button */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 setIsDetailOpen(false);
               }}
-              className="absolute top-4 right-4 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors backdrop-blur-sm"
+              className="absolute top-4 right-4 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
             >
               <X className="w-5 h-5 text-white" />
             </button>
 
-            {/* Doctor Info */}
-            <div className="text-center mb-4">
-              <h3 className="font-heading text-2xl font-bold text-white mb-2 drop-shadow-lg">
-                {name}
-              </h3>
-              <p
-                className="font-body text-base font-semibold mb-1 drop-shadow-md"
-                style={{ color: `hsl(var(${accentVar}))` }}
-              >
-                {credentials}
-              </p>
-              <p className="font-body text-sm text-white/80 drop-shadow-md">
-                {specialty} • {department}
-              </p>
-            </div>
-
-            {/* Bio Paragraph */}
-            <div
-              className="max-w-sm mx-auto mb-6 p-4 rounded-xl"
+            {/* Bio Paragraph - Simple p tag with staggered animation */}
+            <p 
+              className={`font-body text-sm text-white/95 leading-relaxed text-center max-w-sm transition-all duration-700 ${
+                isDetailOpen 
+                  ? "opacity-100 translate-y-0" 
+                  : "opacity-0 translate-y-4"
+              }`}
               style={{
-                background: "hsl(0 0% 100% / 0.15)",
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
-                border: `1px solid hsl(var(${accentVar}) / 0.3)`,
+                transitionDelay: isDetailOpen ? "0.2s" : "0s",
               }}
             >
-              <p className="font-body text-sm text-white/95 leading-relaxed text-center">
-                {bio}
-              </p>
-            </div>
-
-            {/* Book Appointment Button */}
-            <Button
-              variant="hero"
-              className="w-full max-w-sm"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Calendar className="w-4 h-4 mr-2" />
-              Book Appointment
-            </Button>
+              {bio}
+            </p>
           </div>
         </div>
 
