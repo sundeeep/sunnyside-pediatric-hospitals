@@ -8,6 +8,7 @@ import wellChecksImage from "@/assets/services/well-checks.png";
 import sickVisitsImage from "@/assets/services/sick-visits.png";
 import behavioralIssuesImage from "@/assets/services/behavioral-issues.png";
 import immunizationsImage from "@/assets/services/immunizations.png";
+import sportsPhysicalsImage from "@/assets/services/sports-physicals.png";
 
 // Premium services with full content
 const premiumServices = [
@@ -47,16 +48,16 @@ const premiumServices = [
     description: "We follow recommended vaccination schedules to protect children from serious diseases. Safe administration and clear guidance help families stay on track. Immunizations also help build community health and prevention.",
     thumbnail: immunizationsImage,
   },
+  {
+    title: "Sports Physicals",
+    tagline: "Clearance for school and sports.",
+    description: "Before school sports or physical activities, we assess a child's overall health, heart, lungs, and fitness. We ensure safety and readiness for sports participation. Parents receive guidance to support healthy activity.",
+    thumbnail: sportsPhysicalsImage,
+  },
 ];
 
 // Other services with simple flip cards
 const services = [
-  {
-    icon: "⚽",
-    title: "Sports Physicals",
-    subtitle: "Fitness & activity clearance",
-    summary: "Fitness exams for school or team activities.",
-  },
   {
     icon: "💊",
     title: "Chronic Disease Care",
