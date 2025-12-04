@@ -73,7 +73,7 @@ const Footer = () => {
     }
   };
 
-  const mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.7!2d-118.4!3d34.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDAzJzAwLjAiTiAxMTjCsDI0JzAwLjAiVw!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus";
+  const mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.8!2d-84.28!3d33.24!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z33.24,-84.28!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus";
 
   return (
     <footer className="bg-cream-dark">
@@ -127,8 +127,8 @@ const Footer = () => {
               </div>
               <p className="text-center mt-4 font-body text-sm text-muted-foreground">
                 For after-hours emergencies, please call{" "}
-                <a href="tel:555-123-4567" className="text-primary hover:underline font-semibold">
-                  (555) 123-4567
+                <a href="tel:7702334668" className="text-primary hover:underline font-semibold">
+                  (770) 233-4668
                 </a>
               </p>
             </div>
@@ -181,7 +181,7 @@ const Footer = () => {
                       <div>
                         <p className="font-heading font-semibold text-foreground text-xs">Address</p>
                         <p className="font-body text-xs text-muted-foreground">
-                          123 Sunshine Boulevard, Suite 200<br />Sunnyville, CA 90210
+                          1661 W McIntosh Road<br />Griffin, GA 30223
                         </p>
                       </div>
                     </div>
@@ -192,8 +192,8 @@ const Footer = () => {
                         </div>
                         <div>
                           <p className="font-heading font-semibold text-foreground text-xs">Phone</p>
-                          <a href="tel:555-123-4567" className="font-body text-xs text-muted-foreground hover:text-primary transition-colors">
-                            (555) 123-4567
+                          <a href="tel:7702334668" className="font-body text-xs text-muted-foreground hover:text-primary transition-colors">
+                            (770) 233-4668
                           </a>
                         </div>
                       </div>
@@ -203,7 +203,7 @@ const Footer = () => {
                         </div>
                         <div>
                           <p className="font-heading font-semibold text-foreground text-xs">Fax</p>
-                          <p className="font-body text-xs text-muted-foreground">(555) 123-4568</p>
+                          <p className="font-body text-xs text-muted-foreground">(887) 795-7324</p>
                         </div>
                       </div>
                     </div>
@@ -213,7 +213,7 @@ const Footer = () => {
                       variant="outline"
                       size="sm"
                       className="w-full"
-                      onClick={() => window.open('https://maps.google.com/?q=123+Sunshine+Boulevard+Suite+200+Sunnyville+CA+90210', '_blank')}
+                      onClick={() => window.open('https://maps.google.com/?q=1661+W+McIntosh+Road+Griffin+GA+30223', '_blank')}
                     >
                       <Navigation className="w-4 h-4" />
                       Get Directions
@@ -270,11 +270,11 @@ const Footer = () => {
               <h4 className="font-heading font-semibold text-foreground mb-4">Contact Us</h4>
               <div className="space-y-3">
                 <a
-                  href="tel:555-123-4567"
+                  href="tel:7702334668"
                   className="flex items-center gap-3 font-body text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
                   <Phone className="w-4 h-4" />
-                  (555) 123-4567
+                  (770) 233-4668
                 </a>
                 <a
                   href="mailto:info@sunnysidepeds.com"
@@ -286,7 +286,7 @@ const Footer = () => {
                 <div className="flex items-start gap-3 font-body text-sm text-muted-foreground">
                   <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
                   <span>
-                    123 Sunshine Blvd, Suite 200<br />Sunnyville, CA 90210
+                    1661 W McIntosh Road<br />Griffin, GA 30223
                   </span>
                 </div>
               </div>
