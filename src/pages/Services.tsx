@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ServiceFlipCard from "@/components/ServiceFlipCard";
 import ServiceCardPremium from "@/components/ServiceCardPremium";
 import primaryCareImage from "@/assets/services/primary-care.png";
 import newbornCareImage from "@/assets/services/newborn-care.png";
@@ -14,6 +13,7 @@ import developmentalScreeningImage from "@/assets/services/developmental-screeni
 import labServicesImage from "@/assets/services/lab-services.png";
 import televisitsImage from "@/assets/services/televisits.png";
 import referralsImage from "@/assets/services/referrals.png";
+import parentEducationImage from "@/assets/services/parent-education.png";
 
 // Premium services with full content
 const premiumServices = [
@@ -89,15 +89,11 @@ const premiumServices = [
     description: "If a child needs specialized evaluation or treatment, we coordinate referrals to trusted pediatric specialists. We support families through the process. We ensure continuity of care and follow-up.",
     thumbnail: referralsImage,
   },
-];
-
-// Other services with simple flip cards
-const services = [
   {
-    icon: "📖",
-    title: "Parent Education",
-    subtitle: "Guidance at every stage",
-    summary: "Practical advice for each developmental stage.",
+    title: "Parent Education & Guidance",
+    tagline: "Support for parents at every step.",
+    description: "We provide guidance on nutrition, safety, growth milestones, sleep, and parenting challenges. Our team offers resources to help families make informed decisions. We believe in empowering parents with knowledge for healthy child development.",
+    thumbnail: parentEducationImage,
   },
 ];
 
@@ -120,7 +116,6 @@ const Services = () => {
 
           {/* Services Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {/* Premium Service Cards */}
             {premiumServices.map((service, index) => (
               <ServiceCardPremium
                 key={service.title}
@@ -129,18 +124,6 @@ const Services = () => {
                 description={service.description}
                 thumbnail={service.thumbnail}
                 index={index}
-              />
-            ))}
-            
-            {/* Other Service Cards */}
-            {services.map((service, index) => (
-              <ServiceFlipCard
-                key={service.title}
-                icon={service.icon}
-                title={service.title}
-                subtitle={service.subtitle}
-                summary={service.summary}
-                index={index + premiumServices.length}
               />
             ))}
           </div>
