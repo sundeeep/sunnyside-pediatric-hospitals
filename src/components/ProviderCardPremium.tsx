@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronUp, X, Calendar } from "lucide-react";
+import { X, Calendar } from "lucide-react";
 
 interface ProviderCardPremiumProps {
   name: string;
@@ -133,9 +133,18 @@ const ProviderCardPremium = ({
                 }}
               />
 
-              <h3 className="font-heading text-xl font-bold text-white mb-1 drop-shadow-lg">
-                {name}
-              </h3>
+              <div className="flex items-center justify-between mb-1">
+                <h3 className="font-heading text-xl font-bold text-white drop-shadow-lg">
+                  {name}
+                </h3>
+                <button
+                  onClick={() => setIsDetailOpen(true)}
+                  className="relative z-50 font-body text-sm font-medium transition-all duration-300 hover:underline cursor-pointer"
+                  style={{ color: `hsl(var(${accentVar}))` }}
+                >
+                  more
+                </button>
+              </div>
               <p
                 className="font-body text-sm font-semibold drop-shadow-md mb-1"
                 style={{ color: `hsl(var(${accentVar}))` }}
@@ -145,28 +154,6 @@ const ProviderCardPremium = ({
               <p className="font-body text-sm text-white/80 drop-shadow-md">
                 {department}
               </p>
-
-              {/* More Details Button */}
-              <button
-                onClick={() => setIsDetailOpen(true)}
-                className="relative z-50 mt-4 w-full rounded-xl font-body text-sm font-medium text-white transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer flex items-center justify-center gap-2 py-3 px-4 hover:shadow-lg"
-                style={{
-                  background: `linear-gradient(135deg, hsl(var(${accentVar}) / 0.4) 0%, hsl(var(${accentVar}) / 0.2) 100%)`,
-                  border: `1px solid hsl(var(${accentVar}) / 0.5)`,
-                  boxShadow: `0 0 20px hsl(var(${accentVar}) / 0.2)`,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = `0 0 30px hsl(var(${accentVar}) / 0.5), 0 0 60px hsl(var(${accentVar}) / 0.3)`;
-                  e.currentTarget.style.background = `linear-gradient(135deg, hsl(var(${accentVar}) / 0.6) 0%, hsl(var(${accentVar}) / 0.35) 100%)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = `0 0 20px hsl(var(${accentVar}) / 0.2)`;
-                  e.currentTarget.style.background = `linear-gradient(135deg, hsl(var(${accentVar}) / 0.4) 0%, hsl(var(${accentVar}) / 0.2) 100%)`;
-                }}
-              >
-                More Details
-                <ChevronUp className="w-4 h-4" />
-              </button>
             </div>
           </div>
 
