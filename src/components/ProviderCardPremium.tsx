@@ -116,7 +116,7 @@ const ProviderCardPremium = ({
 
             {/* Glassy Bottom Panel with Info */}
             <div
-              className="absolute bottom-0 left-0 right-0 p-5 transition-all duration-300"
+              className="absolute bottom-0 left-0 right-0 p-5 transition-all duration-300 z-40"
               style={{
                 background: isHovered
                   ? "hsl(0 0% 100% / 0.18)"
@@ -127,7 +127,7 @@ const ProviderCardPremium = ({
             >
               {/* Sun Glow Effect */}
               <div
-                className="absolute -top-8 left-1/2 -translate-x-1/2 w-32 h-8 transition-opacity duration-300"
+                className="absolute -top-8 left-1/2 -translate-x-1/2 w-32 h-8 transition-opacity duration-300 pointer-events-none"
                 style={{
                   background: `radial-gradient(ellipse at center, hsl(var(${accentVar}) / ${isHovered ? 0.5 : 0.3}) 0%, transparent 70%)`,
                 }}
@@ -149,10 +149,19 @@ const ProviderCardPremium = ({
               {/* More Details Button */}
               <button
                 onClick={() => setIsDetailOpen(true)}
-                className="mt-4 w-full rounded-xl font-body text-sm font-medium text-white/90 transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer flex items-center justify-center gap-2 py-3 px-4"
+                className="relative z-50 mt-4 w-full rounded-xl font-body text-sm font-medium text-white transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer flex items-center justify-center gap-2 py-3 px-4 hover:shadow-lg"
                 style={{
-                  background: `linear-gradient(135deg, hsl(var(${accentVar}) / 0.3) 0%, hsl(var(${accentVar}) / 0.15) 100%)`,
-                  border: `1px solid hsl(var(${accentVar}) / 0.4)`,
+                  background: `linear-gradient(135deg, hsl(var(${accentVar}) / 0.4) 0%, hsl(var(${accentVar}) / 0.2) 100%)`,
+                  border: `1px solid hsl(var(${accentVar}) / 0.5)`,
+                  boxShadow: `0 0 20px hsl(var(${accentVar}) / 0.2)`,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = `0 0 30px hsl(var(${accentVar}) / 0.5), 0 0 60px hsl(var(${accentVar}) / 0.3)`;
+                  e.currentTarget.style.background = `linear-gradient(135deg, hsl(var(${accentVar}) / 0.6) 0%, hsl(var(${accentVar}) / 0.35) 100%)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = `0 0 20px hsl(var(${accentVar}) / 0.2)`;
+                  e.currentTarget.style.background = `linear-gradient(135deg, hsl(var(${accentVar}) / 0.4) 0%, hsl(var(${accentVar}) / 0.2) 100%)`;
                 }}
               >
                 More Details
