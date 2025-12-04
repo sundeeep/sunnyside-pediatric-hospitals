@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Calendar, User, X } from "lucide-react";
+import { ChevronUp, X, Calendar } from "lucide-react";
 
 interface ProviderCardPremiumProps {
   name: string;
@@ -25,10 +25,7 @@ const ProviderCardPremium = ({
 }: ProviderCardPremiumProps) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
-  const [isAboutOpen, setIsAboutOpen] = useState(false);
-
-  // Extract first name from full name (e.g., "Dr. Chandana Prabhudev" -> "Chandana")
-  const firstName = name.replace("Dr. ", "").split(" ")[0];
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -62,8 +59,8 @@ const ProviderCardPremium = ({
         style={{
           transformStyle: "preserve-3d",
           transform: `
-            rotateX(${isHovered && !isAboutOpen ? -mousePosition.y * 0.5 : 0}deg) 
-            rotateY(${isHovered && !isAboutOpen ? mousePosition.x * 0.5 : 0}deg)
+            rotateX(${isHovered && !isDetailOpen ? -mousePosition.y * 0.5 : 0}deg) 
+            rotateY(${isHovered && !isDetailOpen ? mousePosition.x * 0.5 : 0}deg)
             translateZ(${isHovered ? 20 : 0}px)
           `,
         }}
@@ -149,33 +146,18 @@ const ProviderCardPremium = ({
                 {department}
               </p>
 
-              {/* Two Buttons */}
-              <div className="mt-4 flex gap-3">
-                {/* Book Appointment Button */}
-                <button
-                  className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl font-body text-sm font-medium text-white transition-all duration-300 hover:scale-[1.02] active:scale-95"
-                  style={{
-                    background: `linear-gradient(135deg, hsl(var(${accentVar})) 0%, hsl(var(${accentLightVar})) 100%)`,
-                    boxShadow: `0 4px 15px -3px hsl(var(${accentVar}) / 0.4)`,
-                  }}
-                >
-                  <Calendar className="w-4 h-4" />
-                  <span>Book</span>
-                </button>
-
-                {/* About Button */}
-                <button
-                  onClick={() => setIsAboutOpen(true)}
-                  className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl font-body text-sm font-medium text-white/90 transition-all duration-300 hover:scale-[1.02] active:scale-95"
-                  style={{
-                    background: `linear-gradient(135deg, hsl(0 0% 100% / 0.2) 0%, hsl(0 0% 100% / 0.1) 100%)`,
-                    border: `1px solid hsl(0 0% 100% / 0.3)`,
-                  }}
-                >
-                  <User className="w-4 h-4" />
-                  <span>About {firstName}</span>
-                </button>
-              </div>
+              {/* More Details Button */}
+              <button
+                onClick={() => setIsDetailOpen(true)}
+                className="mt-4 w-full flex items-center justify-center gap-2 py-2.5 rounded-xl font-body text-sm font-medium text-white/90 transition-all duration-300 hover:scale-[1.02] active:scale-95"
+                style={{
+                  background: `linear-gradient(135deg, hsl(var(${accentVar}) / 0.3) 0%, hsl(var(${accentVar}) / 0.15) 100%)`,
+                  border: `1px solid hsl(var(${accentVar}) / 0.4)`,
+                }}
+              >
+                <span>More Details</span>
+                <ChevronUp className="w-4 h-4" />
+              </button>
             </div>
           </div>
 
@@ -194,43 +176,83 @@ const ProviderCardPremium = ({
           />
         </div>
 
-        {/* About Bottom Sheet */}
+        {/* Bottom Sheet Overlay */}
         <div
-          className={`absolute inset-0 rounded-2xl z-40 overflow-hidden transition-all duration-500 ease-out ${
-            isAboutOpen ? "pointer-events-auto" : "pointer-events-none"
+          className={`absolute inset-0 rounded-2xl z-40 transition-all duration-500 ease-out ${
+            isDetailOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
           }`}
-        >
-          {/* Doctor Image behind the sheet */}
-          <img
-            src={image}
-            alt={name}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+          style={{
+            backdropFilter: isDetailOpen ? "blur(4px)" : "blur(0px)",
+          }}
+          onClick={() => setIsDetailOpen(false)}
+        />
 
-          {/* Full Glassy Overlay that slides from bottom */}
+        {/* Bottom Sheet */}
+        <div
+          className={`absolute inset-x-0 bottom-0 rounded-2xl z-50 transition-all duration-500 ease-out overflow-hidden ${
+            isDetailOpen ? "translate-y-0" : "translate-y-full"
+          }`}
+          style={{
+            maxHeight: "100%",
+          }}
+        >
+          {/* Sheet Border */}
           <div
-            className="absolute inset-0 flex flex-col justify-end transition-all duration-500 ease-out"
+            className="absolute inset-0 rounded-2xl p-[2px]"
             style={{
-              background: isAboutOpen
-                ? "linear-gradient(to top, hsl(0 0% 0% / 0.95) 0%, hsl(0 0% 0% / 0.85) 50%, hsl(0 0% 0% / 0.6) 100%)"
-                : "transparent",
-              backdropFilter: isAboutOpen ? "blur(20px) saturate(150%)" : "blur(0px)",
-              WebkitBackdropFilter: isAboutOpen ? "blur(20px) saturate(150%)" : "blur(0px)",
-              transform: `translateY(${isAboutOpen ? 0 : 100}%)`,
+              background: `conic-gradient(
+                from 0deg at 50% 100%,
+                hsl(var(${accentVar})) 0deg,
+                hsl(var(${accentLightVar})) 60deg,
+                hsl(var(--sky-blue-light)) 120deg,
+                hsl(var(--sky-blue)) 180deg,
+                hsl(var(--sky-blue-light)) 240deg,
+                hsl(var(${accentLightVar})) 300deg,
+                hsl(var(${accentVar})) 360deg
+              )`,
             }}
           >
+            <div className="w-full h-full rounded-2xl bg-gradient-to-br from-card via-card to-muted" />
+          </div>
+
+          {/* Sheet Content */}
+          <div
+            className="absolute inset-[2px] rounded-2xl p-6 flex flex-col"
+            style={{
+              background: `linear-gradient(
+                135deg,
+                hsl(var(--cream) / 0.98) 0%,
+                hsl(var(--cream-dark) / 0.99) 100%
+              )`,
+              backdropFilter: "blur(20px)",
+            }}
+          >
+            {/* Handle Bar */}
+            <div className="flex justify-center mb-4">
+              <div className="w-12 h-1 rounded-full bg-muted-foreground/30" />
+            </div>
+
             {/* Close Button */}
             <button
-              onClick={() => setIsAboutOpen(false)}
-              className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors border border-white/20"
+              onClick={() => setIsDetailOpen(false)}
+              className="absolute top-4 right-4 p-1.5 rounded-full bg-muted/50 hover:bg-muted transition-colors"
             >
-              <X className="w-5 h-5 text-white" />
+              <X className="w-4 h-4 text-muted-foreground" />
             </button>
 
-            {/* Content */}
-            <div className="p-6 pt-16">
-              {/* Name and credentials */}
-              <h3 className="font-heading text-2xl font-bold text-white mb-1">
+            {/* Decorative Sun Rays */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-16 opacity-30">
+              <div
+                className="w-full h-full"
+                style={{
+                  background: `radial-gradient(ellipse at center bottom, hsl(var(${accentVar})) 0%, transparent 70%)`,
+                }}
+              />
+            </div>
+
+            {/* Info */}
+            <div className="text-center mb-4">
+              <h3 className="font-heading text-xl font-bold text-foreground mb-1">
                 {name}
               </h3>
               <p
@@ -239,29 +261,27 @@ const ProviderCardPremium = ({
               >
                 {credentials}
               </p>
-              <p className="font-body text-sm text-white/70 mb-4">
-                {specialty}
+              <p className="font-body text-sm text-muted-foreground">
+                {specialty} • {department}
               </p>
-
-              {/* Bio Text - Pure White */}
-              <div className="max-h-[200px] overflow-y-auto pr-2 custom-scrollbar">
-                <p className="font-body text-sm text-white leading-relaxed">
-                  {bio}
-                </p>
-              </div>
-
-              {/* Book Appointment Button */}
-              <Button
-                variant="hero"
-                className="w-full mt-6"
-                onClick={(e) => {
-                  e.stopPropagation();
-                }}
-              >
-                <Calendar className="w-4 h-4 mr-2" />
-                Book Appointment
-              </Button>
             </div>
+
+            {/* Bio */}
+            <div className="flex-1 overflow-y-auto mb-4">
+              <p className="font-body text-sm text-muted-foreground leading-relaxed text-center">
+                {bio}
+              </p>
+            </div>
+
+            {/* Book Appointment Button */}
+            <Button
+              variant="hero"
+              className="w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Calendar className="w-4 h-4 mr-2" />
+              Book Appointment
+            </Button>
           </div>
         </div>
 
