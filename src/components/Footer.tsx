@@ -82,8 +82,8 @@ const Footer = () => {
         <div className="container mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {/* Office Hours */}
-            <div className="flex flex-col items-center lg:items-start">
-              <div className="flex items-center gap-2 mb-4">
+            <div className="flex flex-col items-center">
+              <div className="flex items-center justify-center gap-2 mb-4 w-full">
                 <Clock className="w-5 h-5 text-primary" />
                 <h3 className="font-heading text-lg font-semibold text-foreground">Office Hours</h3>
               </div>
