@@ -149,14 +149,17 @@ const ProviderCardPremium = ({
               {/* More Details Button */}
               <button
                 onClick={() => setIsDetailOpen(true)}
-                className="mt-4 w-full flex items-center justify-center gap-2 py-2.5 rounded-xl font-body text-sm font-medium text-white/90 transition-all duration-300 hover:scale-[1.02] active:scale-95"
+                className="mt-4 w-full rounded-xl font-body text-sm font-medium text-white/90 transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer"
                 style={{
                   background: `linear-gradient(135deg, hsl(var(${accentVar}) / 0.3) 0%, hsl(var(${accentVar}) / 0.15) 100%)`,
                   border: `1px solid hsl(var(${accentVar}) / 0.4)`,
+                  padding: 0,
                 }}
               >
-                <span>More Details</span>
-                <ChevronUp className="w-4 h-4" />
+                <span className="w-full h-full flex items-center justify-center gap-2 py-3 px-4">
+                  More Details
+                  <ChevronUp className="w-4 h-4" />
+                </span>
               </button>
             </div>
           </div>
@@ -176,72 +179,34 @@ const ProviderCardPremium = ({
           />
         </div>
 
-        {/* Bottom Sheet Overlay */}
+        {/* Bottom Sheet Overlay - Blurred Image with Bio */}
         <div
-          className={`absolute inset-0 rounded-2xl z-40 transition-all duration-500 ease-out ${
+          className={`absolute inset-0 rounded-2xl z-40 transition-all duration-500 ease-out overflow-hidden ${
             isDetailOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
           }`}
-          style={{
-            backdropFilter: isDetailOpen ? "blur(4px)" : "blur(0px)",
-          }}
           onClick={() => setIsDetailOpen(false)}
-        />
-
-        {/* Bottom Sheet */}
-        <div
-          className={`absolute inset-x-0 bottom-0 rounded-2xl z-50 transition-all duration-500 ease-out overflow-hidden ${
-            isDetailOpen ? "translate-y-0" : "translate-y-full"
-          }`}
-          style={{
-            maxHeight: "100%",
-          }}
         >
-          {/* Sheet Border */}
+          {/* Doctor Image Background */}
+          <img
+            src={image}
+            alt={name}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          
+          {/* Blur Overlay */}
           <div
-            className="absolute inset-0 rounded-2xl p-[2px]"
+            className="absolute inset-0"
             style={{
-              background: `conic-gradient(
-                from 0deg at 50% 100%,
-                hsl(var(${accentVar})) 0deg,
-                hsl(var(${accentLightVar})) 60deg,
-                hsl(var(--sky-blue-light)) 120deg,
-                hsl(var(--sky-blue)) 180deg,
-                hsl(var(--sky-blue-light)) 240deg,
-                hsl(var(${accentLightVar})) 300deg,
-                hsl(var(${accentVar})) 360deg
-              )`,
+              backdropFilter: isDetailOpen ? "blur(12px)" : "blur(0px)",
+              WebkitBackdropFilter: isDetailOpen ? "blur(12px)" : "blur(0px)",
+              background: "hsl(0 0% 0% / 0.5)",
             }}
-          >
-            <div className="w-full h-full rounded-2xl bg-gradient-to-br from-card via-card to-muted" />
-          </div>
+          />
 
-          {/* Sheet Content */}
-          <div
-            className="absolute inset-[2px] rounded-2xl p-6 flex flex-col"
-            style={{
-              background: `linear-gradient(
-                135deg,
-                hsl(var(--cream) / 0.98) 0%,
-                hsl(var(--cream-dark) / 0.99) 100%
-              )`,
-              backdropFilter: "blur(20px)",
-            }}
-          >
-            {/* Handle Bar */}
-            <div className="flex justify-center mb-4">
-              <div className="w-12 h-1 rounded-full bg-muted-foreground/30" />
-            </div>
-
-            {/* Close Button */}
-            <button
-              onClick={() => setIsDetailOpen(false)}
-              className="absolute top-4 right-4 p-1.5 rounded-full bg-muted/50 hover:bg-muted transition-colors"
-            >
-              <X className="w-4 h-4 text-muted-foreground" />
-            </button>
-
+          {/* Bio Content on Blurred Image */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
             {/* Decorative Sun Rays */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-16 opacity-30">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-24 opacity-40">
               <div
                 className="w-full h-full"
                 style={{
@@ -250,25 +215,44 @@ const ProviderCardPremium = ({
               />
             </div>
 
-            {/* Info */}
+            {/* Close Button */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsDetailOpen(false);
+              }}
+              className="absolute top-4 right-4 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors backdrop-blur-sm"
+            >
+              <X className="w-5 h-5 text-white" />
+            </button>
+
+            {/* Doctor Info */}
             <div className="text-center mb-4">
-              <h3 className="font-heading text-xl font-bold text-foreground mb-1">
+              <h3 className="font-heading text-2xl font-bold text-white mb-2 drop-shadow-lg">
                 {name}
               </h3>
               <p
-                className="font-body text-sm font-semibold mb-1"
+                className="font-body text-base font-semibold mb-1 drop-shadow-md"
                 style={{ color: `hsl(var(${accentVar}))` }}
               >
                 {credentials}
               </p>
-              <p className="font-body text-sm text-muted-foreground">
+              <p className="font-body text-sm text-white/80 drop-shadow-md">
                 {specialty} • {department}
               </p>
             </div>
 
-            {/* Bio */}
-            <div className="flex-1 overflow-y-auto mb-4">
-              <p className="font-body text-sm text-muted-foreground leading-relaxed text-center">
+            {/* Bio Paragraph */}
+            <div
+              className="max-w-sm mx-auto mb-6 p-4 rounded-xl"
+              style={{
+                background: "hsl(0 0% 100% / 0.15)",
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
+                border: `1px solid hsl(var(${accentVar}) / 0.3)`,
+              }}
+            >
+              <p className="font-body text-sm text-white/95 leading-relaxed text-center">
                 {bio}
               </p>
             </div>
@@ -276,7 +260,7 @@ const ProviderCardPremium = ({
             {/* Book Appointment Button */}
             <Button
               variant="hero"
-              className="w-full"
+              className="w-full max-w-sm"
               onClick={(e) => e.stopPropagation()}
             >
               <Calendar className="w-4 h-4 mr-2" />
