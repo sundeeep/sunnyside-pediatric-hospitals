@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Phone, Mail, MapPin, Printer, Navigation, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Printer, Navigation, Clock, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.svg";
 
@@ -172,8 +172,12 @@ const Footer = () => {
               />
               <div className="absolute bottom-0 left-0 right-0 p-4 z-30">
                 <div className="backdrop-blur-xl bg-card/80 rounded-xl p-4 shadow-soft border border-border/50">
-                  <h3 className="font-heading text-base font-semibold text-foreground mb-1">Contact Information</h3>
-                  <p className="font-body text-xs text-foreground font-medium mb-3">Sunnyside Pediatrics</p>
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-8 h-8 bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Building2 className="w-4 h-4 text-secondary" />
+                    </div>
+                    <p className="font-heading text-sm font-semibold text-foreground">Sunnyside Pediatrics</p>
+                  </div>
                   <div className="space-y-3">
                     <div className="flex items-start gap-3">
                       <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -268,9 +272,12 @@ const Footer = () => {
 
             {/* Contact */}
             <div>
-              <h4 className="font-heading font-semibold text-foreground mb-2">Contact Us</h4>
-              <p className="font-body text-sm text-foreground font-medium mb-3">Sunnyside Pediatrics</p>
+              <h4 className="font-heading font-semibold text-foreground mb-4">Contact Us</h4>
               <div className="space-y-3">
+                <div className="flex items-center gap-3 font-body text-sm text-foreground font-semibold">
+                  <Building2 className="w-4 h-4" />
+                  Sunnyside Pediatrics
+                </div>
                 <a
                   href="tel:7702334668"
                   className="flex items-center gap-3 font-body text-sm text-muted-foreground hover:text-primary transition-colors"
