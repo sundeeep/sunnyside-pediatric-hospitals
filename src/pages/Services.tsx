@@ -3,23 +3,26 @@ import Footer from "@/components/Footer";
 import ServiceFlipCard from "@/components/ServiceFlipCard";
 import ServiceCardPremium from "@/components/ServiceCardPremium";
 import primaryCareImage from "@/assets/services/primary-care.png";
+import newbornCareImage from "@/assets/services/newborn-care.png";
 
-// Premium service with full content
-const premiumService = {
-  title: "Primary Care",
-  tagline: "Comprehensive care for growing kids.",
-  description: "We provide routine and preventive health care for all children. Growth, development and wellness are monitored in each visit. We build a long-term health partnership between family and pediatrician.",
-  thumbnail: primaryCareImage,
-};
+// Premium services with full content
+const premiumServices = [
+  {
+    title: "Primary Care",
+    tagline: "Comprehensive care for growing kids.",
+    description: "We provide routine and preventive health care for all children. Growth, development and wellness are monitored in each visit. We build a long-term health partnership between family and pediatrician.",
+    thumbnail: primaryCareImage,
+  },
+  {
+    title: "Newborn Care",
+    tagline: "Gentle care from day one.",
+    description: "Our newborn care includes assessments of growth, feeding, reflexes and general health. We support parents with guidance on feeding, sleep, and early developmental milestones. Your baby's first days get careful attention and warmth.",
+    thumbnail: newbornCareImage,
+  },
+];
 
 // Other services with simple flip cards
 const services = [
-  {
-    icon: "👶",
-    title: "Newborn Care",
-    subtitle: "Welcome your newest family member",
-    summary: "Early checks and newborn developmental support.",
-  },
   {
     icon: "📋",
     title: "Well Checks",
@@ -107,14 +110,17 @@ const Services = () => {
 
           {/* Services Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {/* Premium Primary Care Card */}
-            <ServiceCardPremium
-              title={premiumService.title}
-              tagline={premiumService.tagline}
-              description={premiumService.description}
-              thumbnail={premiumService.thumbnail}
-              index={0}
-            />
+            {/* Premium Service Cards */}
+            {premiumServices.map((service, index) => (
+              <ServiceCardPremium
+                key={service.title}
+                title={service.title}
+                tagline={service.tagline}
+                description={service.description}
+                thumbnail={service.thumbnail}
+                index={index}
+              />
+            ))}
             
             {/* Other Service Cards */}
             {services.map((service, index) => (
@@ -124,7 +130,7 @@ const Services = () => {
                 title={service.title}
                 subtitle={service.subtitle}
                 summary={service.summary}
-                index={index + 1}
+                index={index + premiumServices.length}
               />
             ))}
           </div>
