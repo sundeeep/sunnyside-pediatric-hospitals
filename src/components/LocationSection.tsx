@@ -14,12 +14,15 @@ const LocationSection = () => {
     phone: "",
     message: "",
   });
+  
+  // Map card hover state
+  const [isMapHovered, setIsMapHovered] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1000));
     
     toast({
@@ -35,6 +38,16 @@ const LocationSection = () => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const handleMapMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    setMousePosition({ x, y });
+  };
+
+  // Google Maps embed URL for the address
+  const mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.7!2d-118.4!3d34.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDAzJzAwLjAiTiAxMTjCsDI0JzAwLjAiVw!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus";
+
   return (
     <section id="contact" className="py-20 bg-cream-dark">
       <div className="container mx-auto">
@@ -47,9 +60,9 @@ const LocationSection = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {/* Contact Form */}
-          <div className="lg:col-span-2 bg-card rounded-xl p-8 shadow-soft">
+        <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {/* Contact Form - Left Side */}
+          <div className="bg-card rounded-xl p-8 shadow-soft h-full">
             <h3 className="font-heading text-card-title text-foreground mb-6 flex items-center gap-2">
               <MessageSquare className="w-6 h-6 text-primary" />
               Request an Appointment
@@ -122,68 +135,127 @@ const LocationSection = () => {
             </form>
           </div>
 
-          {/* Contact Info */}
-          <div className="bg-card rounded-xl p-8 shadow-soft">
-            <h3 className="font-heading text-card-title text-foreground mb-6">
-              Contact Information
-            </h3>
+          {/* Map Card with Contact Info Overlay - Right Side */}
+          <div 
+            className="relative h-full min-h-[500px] rounded-xl overflow-hidden cursor-pointer group"
+            onMouseEnter={() => setIsMapHovered(true)}
+            onMouseLeave={() => setIsMapHovered(false)}
+            onMouseMove={handleMapMouseMove}
+            style={{
+              transform: isMapHovered
+                ? `perspective(1000px) rotateY(${(mousePosition.x - 0.5) * 8}deg) rotateX(${(0.5 - mousePosition.y) * 8}deg) translateY(-8px)`
+                : 'perspective(1000px) rotateY(0deg) rotateX(0deg) translateY(0px)',
+              transition: 'transform 0.3s ease-out',
+            }}
+          >
+            {/* Glowing border effect */}
+            <div 
+              className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
+              style={{
+                background: isMapHovered
+                  ? `radial-gradient(600px circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, hsl(var(--primary) / 0.3), transparent 40%)`
+                  : 'none',
+              }}
+            />
+            
+            {/* Border glow */}
+            <div 
+              className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
+              style={{
+                boxShadow: isMapHovered
+                  ? `inset 0 0 0 1px hsl(var(--primary) / 0.5), 0 0 30px hsl(var(--primary) / 0.2)`
+                  : 'none',
+              }}
+            />
 
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <p className="font-heading font-semibold text-foreground mb-1">
-                    Address
-                  </p>
-                  <p className="font-body text-muted-foreground">
-                    123 Sunshine Boulevard
-                    <br />
-                    Suite 200
-                    <br />
-                    Sunnyville, CA 90210
-                  </p>
-                </div>
-              </div>
+            {/* Shimmer effect */}
+            <div 
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-20"
+              style={{
+                background: 'linear-gradient(105deg, transparent 40%, hsl(var(--primary) / 0.1) 45%, hsl(var(--primary) / 0.2) 50%, hsl(var(--primary) / 0.1) 55%, transparent 60%)',
+                backgroundSize: '200% 100%',
+                animation: isMapHovered ? 'shimmer 2s infinite' : 'none',
+              }}
+            />
 
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-6 h-6 text-secondary" />
+            {/* Google Maps Embed */}
+            <iframe
+              src={mapEmbedUrl}
+              className="absolute inset-0 w-full h-full border-0"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Office Location"
+            />
+
+            {/* Glassmorphism Contact Info Overlay */}
+            <div className="absolute bottom-0 left-0 right-0 p-6 z-30">
+              <div 
+                className="backdrop-blur-xl bg-card/80 rounded-xl p-6 shadow-soft border border-border/50"
+                style={{
+                  backdropFilter: 'blur(20px)',
+                }}
+              >
+                <h3 className="font-heading text-lg font-semibold text-foreground mb-4">
+                  Contact Information
+                </h3>
+                
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <p className="font-heading font-semibold text-foreground text-sm">Address</p>
+                      <p className="font-body text-sm text-muted-foreground">
+                        123 Sunshine Boulevard, Suite 200
+                        <br />
+                        Sunnyville, CA 90210
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <Phone className="w-5 h-5 text-secondary" />
+                      </div>
+                      <div>
+                        <p className="font-heading font-semibold text-foreground text-sm">Phone</p>
+                        <a
+                          href="tel:555-123-4567"
+                          className="font-body text-sm text-muted-foreground hover:text-primary transition-colors"
+                        >
+                          (555) 123-4567
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
+                        <Printer className="w-5 h-5 text-muted-foreground" />
+                      </div>
+                      <div>
+                        <p className="font-heading font-semibold text-foreground text-sm">Fax</p>
+                        <p className="font-body text-sm text-muted-foreground">
+                          (555) 123-4568
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-heading font-semibold text-foreground mb-1">
-                    Phone
-                  </p>
-                  <a
-                    href="tel:555-123-4567"
-                    className="font-body text-muted-foreground hover:text-primary transition-colors"
+
+                <div className="mt-4">
+                  <Button 
+                    variant="outline" 
+                    className="w-full"
+                    onClick={() => window.open('https://maps.google.com/?q=123+Sunshine+Boulevard+Suite+200+Sunnyville+CA+90210', '_blank')}
                   >
-                    (555) 123-4567
-                  </a>
+                    <Navigation className="w-4 h-4" />
+                    Get Directions
+                  </Button>
                 </div>
               </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Printer className="w-6 h-6 text-muted-foreground" />
-                </div>
-                <div>
-                  <p className="font-heading font-semibold text-foreground mb-1">
-                    Fax
-                  </p>
-                  <p className="font-body text-muted-foreground">
-                    (555) 123-4568
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8">
-              <Button variant="outline" className="w-full">
-                <Navigation className="w-5 h-5" />
-                Get Directions
-              </Button>
             </div>
           </div>
         </div>
