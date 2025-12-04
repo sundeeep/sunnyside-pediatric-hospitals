@@ -10,6 +10,7 @@ import behavioralIssuesImage from "@/assets/services/behavioral-issues.png";
 import immunizationsImage from "@/assets/services/immunizations.png";
 import sportsPhysicalsImage from "@/assets/services/sports-physicals.png";
 import chronicDiseaseCareImage from "@/assets/services/chronic-disease-care.png";
+import developmentalScreeningImage from "@/assets/services/developmental-screening.png";
 
 // Premium services with full content
 const premiumServices = [
@@ -61,16 +62,16 @@ const premiumServices = [
     description: "We manage long-term pediatric conditions such as asthma or diabetes with regular check-ups and tailored care plans. Our team monitors health, coordinates treatment, and supports families through chronic care. We aim for stability and quality of life.",
     thumbnail: chronicDiseaseCareImage,
   },
+  {
+    title: "Developmental Screening",
+    tagline: "Early checks for healthy development.",
+    description: "Through developmental screenings we check motor, speech, hearing, and social milestones in children. Early detection helps ensure timely support if issues arise. We guide parents and refer to specialists when needed.",
+    thumbnail: developmentalScreeningImage,
+  },
 ];
 
 // Other services with simple flip cards
 const services = [
-  {
-    icon: "📊",
-    title: "Developmental Screening",
-    subtitle: "Early detection & intervention",
-    summary: "Early detection of speech, motor, and social delays.",
-  },
   {
     icon: "🔬",
     title: "Lab Services",
