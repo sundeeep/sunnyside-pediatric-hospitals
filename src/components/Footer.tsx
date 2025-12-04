@@ -4,6 +4,13 @@ import logo from "@/assets/logo.svg";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const handleNavClick = (href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <footer className="bg-foreground text-background py-12">
       <div className="container mx-auto">
@@ -29,17 +36,24 @@ const Footer = () => {
               Quick Links
             </h4>
             <nav className="space-y-2">
-              {["Home", "Services", "Providers", "Patient Documents"].map(
-                (link) => (
-                  <a
-                    key={link}
-                    href={`#${link.toLowerCase().replace(" ", "-")}`}
-                    className="block font-body text-sm text-primary/70 hover:text-primary transition-colors"
-                  >
-                    {link}
-                  </a>
-                )
-              )}
+              {[
+                { name: "Home", href: "#home" },
+                { name: "Services", href: "#services" },
+                { name: "Providers", href: "#providers" },
+                { name: "Patient Documents", href: "#documents" },
+              ].map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(link.href);
+                  }}
+                  className="block font-body text-sm text-primary/70 hover:text-primary transition-colors"
+                >
+                  {link.name}
+                </a>
+              ))}
             </nav>
           </div>
 
