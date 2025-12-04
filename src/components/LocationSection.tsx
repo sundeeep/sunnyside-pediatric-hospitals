@@ -1,38 +1,125 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Printer, Navigation } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { MapPin, Phone, Printer, Navigation, Send, User, Mail, MessageSquare } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const LocationSection = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    
+    toast({
+      title: "Message Sent!",
+      description: "We'll get back to you as soon as possible.",
+    });
+    
+    setFormData({ name: "", email: "", phone: "", message: "" });
+    setIsSubmitting(false);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
   return (
-    <section className="py-20 bg-cream-dark">
+    <section id="contact" className="py-20 bg-cream-dark">
       <div className="container mx-auto">
         <div className="text-center mb-14">
           <h2 className="font-heading text-section-title text-foreground mb-4">
-            Find Us
+            Contact Us
           </h2>
           <p className="font-body text-body text-muted-foreground">
-            Conveniently located to serve families throughout the community.
+            Get in touch or visit us. We're here to help your family.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {/* Map Placeholder */}
-          <div className="bg-sky-light rounded-xl overflow-hidden shadow-soft h-80 lg:h-auto relative">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce-soft">
-                  <MapPin className="w-8 h-8 text-primary-foreground" />
+        <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {/* Contact Form */}
+          <div className="lg:col-span-2 bg-card rounded-xl p-8 shadow-soft">
+            <h3 className="font-heading text-card-title text-foreground mb-6 flex items-center gap-2">
+              <MessageSquare className="w-6 h-6 text-primary" />
+              Request an Appointment
+            </h3>
+            
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="grid sm:grid-cols-2 gap-5">
+                <div className="relative">
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                  <Input
+                    name="name"
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="pl-10 h-12 bg-background border-border focus:border-primary"
+                  />
                 </div>
-                <p className="font-heading font-semibold text-foreground">
-                  Interactive Map
-                </p>
-                <p className="font-body text-sm text-muted-foreground">
-                  Coming Soon
-                </p>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                  <Input
+                    name="email"
+                    type="email"
+                    placeholder="Email Address"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="pl-10 h-12 bg-background border-border focus:border-primary"
+                  />
+                </div>
               </div>
-            </div>
-            {/* Decorative elements */}
-            <div className="absolute top-4 right-4 w-20 h-20 bg-card/50 rounded-full" />
-            <div className="absolute bottom-8 left-8 w-12 h-12 bg-primary/30 rounded-full" />
+              
+              <div className="relative">
+                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Input
+                  name="phone"
+                  type="tel"
+                  placeholder="Phone Number"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="pl-10 h-12 bg-background border-border focus:border-primary"
+                />
+              </div>
+              
+              <Textarea
+                name="message"
+                placeholder="Tell us about your appointment needs..."
+                value={formData.message}
+                onChange={handleChange}
+                required
+                rows={4}
+                className="bg-background border-border focus:border-primary resize-none"
+              />
+              
+              <Button 
+                type="submit" 
+                variant="default" 
+                className="w-full h-12"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  "Sending..."
+                ) : (
+                  <>
+                    <Send className="w-5 h-5" />
+                    Send Message
+                  </>
+                )}
+              </Button>
+            </form>
           </div>
 
           {/* Contact Info */}
@@ -93,7 +180,7 @@ const LocationSection = () => {
             </div>
 
             <div className="mt-8">
-              <Button variant="default" className="w-full">
+              <Button variant="outline" className="w-full">
                 <Navigation className="w-5 h-5" />
                 Get Directions
               </Button>
