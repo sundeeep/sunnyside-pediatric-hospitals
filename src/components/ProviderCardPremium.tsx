@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ChevronUp, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ChevronUp, X, Calendar } from "lucide-react";
 
 interface ProviderCardPremiumProps {
   name: string;
@@ -203,7 +204,7 @@ const ProviderCardPremium = ({
           />
 
           {/* Bio Content on Blurred Image */}
-          <div className="absolute inset-0 flex items-center justify-center p-8">
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
             {/* Close Button */}
             <button
               onClick={(e) => {
@@ -229,6 +230,23 @@ const ProviderCardPremium = ({
             >
               {bio}
             </p>
+
+            {/* Book Appointment Button */}
+            <Button
+              variant="hero"
+              className={`mt-6 w-full max-w-xs transition-all duration-700 ${
+                isDetailOpen 
+                  ? "opacity-100 translate-y-0" 
+                  : "opacity-0 translate-y-4"
+              }`}
+              style={{
+                transitionDelay: isDetailOpen ? "0.4s" : "0s",
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Calendar className="w-4 h-4 mr-2" />
+              Book Appointment
+            </Button>
           </div>
         </div>
 
