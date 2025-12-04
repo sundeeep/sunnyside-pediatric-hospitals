@@ -73,7 +73,7 @@ const Footer = () => {
     }
   };
 
-  const mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.8!2d-84.28!3d33.24!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z33.24,-84.28!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus";
+  const mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.5!2d-84.2847!3d33.2453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f45a1c0e8d0b0d%3A0x0!2s1661+W+McIntosh+Rd%2C+Griffin%2C+GA+30223!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus";
 
   return (
     <footer className="bg-cream-dark">
