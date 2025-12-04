@@ -9,6 +9,7 @@ import sickVisitsImage from "@/assets/services/sick-visits.png";
 import behavioralIssuesImage from "@/assets/services/behavioral-issues.png";
 import immunizationsImage from "@/assets/services/immunizations.png";
 import sportsPhysicalsImage from "@/assets/services/sports-physicals.png";
+import chronicDiseaseCareImage from "@/assets/services/chronic-disease-care.png";
 
 // Premium services with full content
 const premiumServices = [
@@ -54,16 +55,16 @@ const premiumServices = [
     description: "Before school sports or physical activities, we assess a child's overall health, heart, lungs, and fitness. We ensure safety and readiness for sports participation. Parents receive guidance to support healthy activity.",
     thumbnail: sportsPhysicalsImage,
   },
+  {
+    title: "Chronic Disease Care",
+    tagline: "Continuous care for ongoing conditions.",
+    description: "We manage long-term pediatric conditions such as asthma or diabetes with regular check-ups and tailored care plans. Our team monitors health, coordinates treatment, and supports families through chronic care. We aim for stability and quality of life.",
+    thumbnail: chronicDiseaseCareImage,
+  },
 ];
 
 // Other services with simple flip cards
 const services = [
-  {
-    icon: "💊",
-    title: "Chronic Disease Care",
-    subtitle: "Long-term health management",
-    summary: "Long-term care for conditions like asthma or diabetes.",
-  },
   {
     icon: "📊",
     title: "Developmental Screening",
