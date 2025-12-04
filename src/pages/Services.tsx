@@ -5,6 +5,7 @@ import ServiceCardPremium from "@/components/ServiceCardPremium";
 import primaryCareImage from "@/assets/services/primary-care.png";
 import newbornCareImage from "@/assets/services/newborn-care.png";
 import wellChecksImage from "@/assets/services/well-checks.png";
+import sickVisitsImage from "@/assets/services/sick-visits.png";
 
 // Premium services with full content
 const premiumServices = [
@@ -26,16 +27,16 @@ const premiumServices = [
     description: "Well-check visits track your child's physical growth, hearing, vision and developmental milestones. Regular wellness exams help catch issues early and reinforce healthy habits. Immunizations and preventive guidance are part of each visit.",
     thumbnail: wellChecksImage,
   },
+  {
+    title: "Sick Visits",
+    tagline: "Quick care when illness strikes.",
+    description: "For fevers, colds, infections or minor injuries, we provide prompt evaluation and treatment. Our team acts fast to relieve symptoms and prevent complications. Parents get clear advice for home care and follow-up.",
+    thumbnail: sickVisitsImage,
+  },
 ];
 
 // Other services with simple flip cards
 const services = [
-  {
-    icon: "🤒",
-    title: "Sick Visits",
-    subtitle: "Same-day appointments available",
-    summary: "Fast care for acute illnesses and symptoms.",
-  },
   {
     icon: "🧠",
     title: "Behavioral Issues",
