@@ -11,6 +11,7 @@ import immunizationsImage from "@/assets/services/immunizations.png";
 import sportsPhysicalsImage from "@/assets/services/sports-physicals.png";
 import chronicDiseaseCareImage from "@/assets/services/chronic-disease-care.png";
 import developmentalScreeningImage from "@/assets/services/developmental-screening.png";
+import labServicesImage from "@/assets/services/lab-services.png";
 
 // Premium services with full content
 const premiumServices = [
@@ -68,16 +69,16 @@ const premiumServices = [
     description: "Through developmental screenings we check motor, speech, hearing, and social milestones in children. Early detection helps ensure timely support if issues arise. We guide parents and refer to specialists when needed.",
     thumbnail: developmentalScreeningImage,
   },
+  {
+    title: "Lab Services",
+    tagline: "Fast diagnostics when needed.",
+    description: "We provide basic lab testing onsite for quick screening or diagnosis. Results help guide treatment decisions without delay. This ensures efficient, coordinated care under one roof.",
+    thumbnail: labServicesImage,
+  },
 ];
 
 // Other services with simple flip cards
 const services = [
-  {
-    icon: "🔬",
-    title: "Lab Services",
-    subtitle: "Onsite testing available",
-    summary: "Onsite tests and quick diagnostics.",
-  },
   {
     icon: "📱",
     title: "TeleVisits",
