@@ -1,17 +1,76 @@
 import { Clock } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const schedule = [
-  { day: "Monday", hours: "8:00 AM – 5:00 PM" },
-  { day: "Tuesday", hours: "8:00 AM – 5:00 PM" },
-  { day: "Wednesday", hours: "8:00 AM – 5:00 PM" },
-  { day: "Thursday", hours: "8:00 AM – 5:00 PM" },
-  { day: "Friday", hours: "8:00 AM – 4:00 PM" },
-  { day: "Saturday", hours: "9:00 AM – 12:00 PM" },
-  { day: "Sunday", hours: "Closed" },
+  { day: "Sunday", hours: "Closed", open: null, close: null },
+  { day: "Monday", hours: "8:00 AM – 5:00 PM", open: 8, close: 17 },
+  { day: "Tuesday", hours: "8:00 AM – 5:00 PM", open: 8, close: 17 },
+  { day: "Wednesday", hours: "8:00 AM – 5:00 PM", open: 8, close: 17 },
+  { day: "Thursday", hours: "8:00 AM – 5:00 PM", open: 8, close: 17 },
+  { day: "Friday", hours: "8:00 AM – 4:00 PM", open: 8, close: 16 },
+  { day: "Saturday", hours: "9:00 AM – 12:00 PM", open: 9, close: 12 },
 ];
 
+const dayOrder = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
 const OfficeHoursSection = () => {
-  const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 60000); // Update every minute
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const today = currentTime.toLocaleDateString("en-US", { weekday: "long" });
+  const currentHour = currentTime.getHours();
+  const currentMinute = currentTime.getMinutes();
+  const dayIndex = currentTime.getDay(); // 0 = Sunday
+
+  const todaySchedule = schedule[dayIndex];
+
+  const getTimeRemaining = () => {
+    if (!todaySchedule.open || !todaySchedule.close) return null;
+
+    const now = currentHour + currentMinute / 60;
+
+    if (now < todaySchedule.open) {
+      // Office not yet open
+      const minutesUntilOpen = (todaySchedule.open - currentHour) * 60 - currentMinute;
+      const hours = Math.floor(minutesUntilOpen / 60);
+      const mins = minutesUntilOpen % 60;
+      return { type: "opening", hours, mins };
+    }
+
+    if (now >= todaySchedule.open && now < todaySchedule.close) {
+      // Office is open
+      const minutesUntilClose = (todaySchedule.close - currentHour) * 60 - currentMinute;
+      const hours = Math.floor(minutesUntilClose / 60);
+      const mins = minutesUntilClose % 60;
+      return { type: "closing", hours, mins };
+    }
+
+    return { type: "closed", hours: 0, mins: 0 };
+  };
+
+  const timeRemaining = getTimeRemaining();
+
+  const formatTimeRemaining = () => {
+    if (!timeRemaining) return "Closed today";
+    
+    if (timeRemaining.type === "closed") return "Closed for today";
+    
+    const hoursText = timeRemaining.hours > 0 ? `${timeRemaining.hours}h ` : "";
+    const minsText = `${timeRemaining.mins}m`;
+    
+    if (timeRemaining.type === "opening") {
+      return `Opens in ${hoursText}${minsText}`;
+    }
+    
+    return `${hoursText}${minsText} until closing`;
+  };
 
   return (
     <section className="py-20 bg-card">
@@ -30,8 +89,9 @@ const OfficeHoursSection = () => {
           </div>
 
           <div className="bg-background rounded-xl shadow-soft overflow-hidden">
-            {schedule.map((item, index) => {
-              const isToday = item.day === today;
+            {dayOrder.map((dayName) => {
+              const item = schedule.find((s) => s.day === dayName)!;
+              const isToday = dayName === today;
               const isClosed = item.hours === "Closed";
 
               return (
@@ -60,17 +120,24 @@ const OfficeHoursSection = () => {
                       )}
                     </span>
                   </div>
-                  <span
-                    className={`font-body ${
-                      isClosed
-                        ? "text-muted-foreground"
-                        : isToday
-                        ? "text-primary font-medium"
-                        : "text-foreground"
-                    }`}
-                  >
-                    {item.hours}
-                  </span>
+                  <div className="flex items-center gap-4">
+                    {isToday && timeRemaining && (
+                      <span className="text-xs font-body text-primary/80 bg-primary/10 px-2 py-1 rounded-full">
+                        {formatTimeRemaining()}
+                      </span>
+                    )}
+                    <span
+                      className={`font-body ${
+                        isClosed
+                          ? "text-muted-foreground"
+                          : isToday
+                          ? "text-primary font-medium"
+                          : "text-foreground"
+                      }`}
+                    >
+                      {item.hours}
+                    </span>
+                  </div>
                 </div>
               );
             })}
