@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Sun } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import logo from "@/assets/logo.svg";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -18,18 +19,12 @@ const Header = () => {
       <div className="container mx-auto">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
-              <Sun className="w-7 h-7 text-primary-foreground" />
-            </div>
-            <div className="hidden sm:block">
-              <h1 className="font-heading font-bold text-xl text-foreground leading-tight">
-                Sunnyside
-              </h1>
-              <p className="font-body text-sm text-muted-foreground -mt-1">
-                Pediatrics
-              </p>
-            </div>
+          <Link to="/" className="group">
+            <img 
+              src={logo} 
+              alt="Sunnyside Pediatrics" 
+              className="h-14 w-auto group-hover:scale-105 transition-transform duration-300"
+            />
           </Link>
 
           {/* Desktop Navigation */}
