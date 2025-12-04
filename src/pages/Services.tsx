@@ -6,6 +6,7 @@ import primaryCareImage from "@/assets/services/primary-care.png";
 import newbornCareImage from "@/assets/services/newborn-care.png";
 import wellChecksImage from "@/assets/services/well-checks.png";
 import sickVisitsImage from "@/assets/services/sick-visits.png";
+import behavioralIssuesImage from "@/assets/services/behavioral-issues.png";
 
 // Premium services with full content
 const premiumServices = [
@@ -33,16 +34,16 @@ const premiumServices = [
     description: "For fevers, colds, infections or minor injuries, we provide prompt evaluation and treatment. Our team acts fast to relieve symptoms and prevent complications. Parents get clear advice for home care and follow-up.",
     thumbnail: sickVisitsImage,
   },
+  {
+    title: "Behavioral Issues",
+    tagline: "Support for emotional growth.",
+    description: "We help assess and manage emotional or behavioral concerns like anxiety, attention issues, or mood changes. Early support and guidance help children navigate challenges. We partner with families for wellbeing and development.",
+    thumbnail: behavioralIssuesImage,
+  },
 ];
 
 // Other services with simple flip cards
 const services = [
-  {
-    icon: "🧠",
-    title: "Behavioral Issues",
-    subtitle: "Emotional & behavioral support",
-    summary: "Support for emotional and behavioral concerns.",
-  },
   {
     icon: "💉",
     title: "Immunizations",
