@@ -1,5 +1,6 @@
 import ProviderCardPremium from "./ProviderCardPremium";
 import drChandana from "@/assets/providers/dr-chandana-prabhudev.png";
+import drJose from "@/assets/providers/dr-jose-rios.png";
 
 const providers = [
   {
@@ -17,7 +18,7 @@ const providers = [
     specialty: "Pediatric Wellness & Preventive Care",
     department: "Pediatric Wellness & Preventive Care",
     bio: "Dr. Jose Rios is a dedicated pediatrician passionate about preventive care and helping families establish healthy habits from an early age. He earned his medical degree with honors and completed his residency training at a renowned pediatric medical center. With over 10 years of clinical experience, Dr. Rios specializes in wellness exams, immunizations, and managing chronic conditions in children. He is fluent in both English and Spanish, allowing him to connect with a diverse patient population. Dr. Rios takes pride in educating parents and empowering them to make informed decisions about their child's health. In his free time, he enjoys coaching youth soccer and volunteering in the community.",
-    image: "/placeholder.svg", // Placeholder until image is provided
+    image: drJose,
     accentColor: "secondary" as const,
   },
 ];
