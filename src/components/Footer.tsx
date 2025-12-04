@@ -173,7 +173,7 @@ const Footer = () => {
               <div className="absolute bottom-0 left-0 right-0 p-4 z-30">
                 <div className="backdrop-blur-xl bg-card/80 rounded-xl p-4 shadow-soft border border-border/50">
                   <h3 className="font-heading text-base font-semibold text-foreground mb-1">Contact Information</h3>
-                  <p className="font-body text-xs text-primary font-medium mb-3">Sunnyside Pediatrics</p>
+                  <p className="font-body text-xs text-foreground font-medium mb-3">Sunnyside Pediatrics</p>
                   <div className="space-y-3">
                     <div className="flex items-start gap-3">
                       <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -269,7 +269,7 @@ const Footer = () => {
             {/* Contact */}
             <div>
               <h4 className="font-heading font-semibold text-foreground mb-2">Contact Us</h4>
-              <p className="font-body text-sm text-primary font-medium mb-3">Sunnyside Pediatrics</p>
+              <p className="font-body text-sm text-foreground font-medium mb-3">Sunnyside Pediatrics</p>
               <div className="space-y-3">
                 <a
                   href="tel:7702334668"
