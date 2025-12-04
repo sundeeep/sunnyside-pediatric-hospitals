@@ -1,31 +1,28 @@
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import ProviderCardPremium from "./ProviderCardPremium";
 
 const providers = [
   {
-    name: "Dr. Sarah Mitchell",
-    title: "MD, FAAP",
-    specialty: "General Pediatrics",
-    description:
-      "With over 15 years of experience, Dr. Mitchell specializes in newborn care and childhood development.",
-    initials: "SM",
-    color: "bg-primary",
+    name: "Dr. Chandana Prabhudev",
+    credentials: "MD - Pediatrics",
+    specialty: "General Pediatrics & Developmental Care",
+    bio: "Dr. Chandana Prabhudev is a board-certified pediatrician with over 12 years of experience caring for children from newborns through adolescence. She completed her medical degree at a top-tier institution and her pediatric residency at a leading children's hospital. Dr. Prabhudev has a special interest in developmental screenings and early childhood wellness. She believes in building lasting relationships with families and providing personalized, compassionate care. Her warm and patient approach helps children feel comfortable during visits. Outside of medicine, she enjoys spending time with her own family and exploring nature trails.",
+    initials: "CP",
+    accentColor: "primary" as const,
   },
   {
-    name: "Dr. James Chen",
-    title: "MD, FAAP",
-    specialty: "Pediatric Wellness",
-    description:
-      "Dr. Chen is passionate about preventive care and helping families establish healthy habits early.",
-    initials: "JC",
-    color: "bg-secondary",
+    name: "Dr. Jose Rios",
+    credentials: "MD - Pediatrics",
+    specialty: "Pediatric Wellness & Preventive Care",
+    bio: "Dr. Jose Rios is a dedicated pediatrician passionate about preventive care and helping families establish healthy habits from an early age. He earned his medical degree with honors and completed his residency training at a renowned pediatric medical center. With over 10 years of clinical experience, Dr. Rios specializes in wellness exams, immunizations, and managing chronic conditions in children. He is fluent in both English and Spanish, allowing him to connect with a diverse patient population. Dr. Rios takes pride in educating parents and empowering them to make informed decisions about their child's health. In his free time, he enjoys coaching youth soccer and volunteering in the community.",
+    initials: "JR",
+    accentColor: "secondary" as const,
   },
 ];
 
 const ProvidersSection = () => {
   return (
     <section id="providers" className="py-20 bg-cream-dark">
-      <div className="container mx-auto">
+      <div className="container mx-auto px-4">
         <div className="text-center mb-14">
           <h2 className="font-heading text-section-title text-foreground mb-4">
             Meet Our Providers
@@ -36,48 +33,18 @@ const ProvidersSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
           {providers.map((provider, index) => (
-            <div
+            <ProviderCardPremium
               key={provider.name}
-              className="group bg-card rounded-xl p-8 shadow-soft hover:shadow-card transition-all duration-500 hover:-translate-y-2 opacity-0 animate-scale-in"
-              style={{ animationDelay: `${0.1 + index * 0.15}s` }}
-            >
-              {/* Avatar */}
-              <div className="flex items-start gap-6 mb-6">
-                <div
-                  className={`w-20 h-20 ${provider.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300`}
-                >
-                  <span className="font-heading font-bold text-2xl text-primary-foreground">
-                    {provider.initials}
-                  </span>
-                </div>
-
-                <div className="flex-1">
-                  <h3 className="font-heading text-card-title text-foreground mb-1">
-                    {provider.name}
-                  </h3>
-                  <p className="font-body text-sm text-primary font-semibold">
-                    {provider.title}
-                  </p>
-                  <p className="font-body text-sm text-muted-foreground">
-                    {provider.specialty}
-                  </p>
-                </div>
-              </div>
-
-              <p className="font-body text-body text-muted-foreground mb-6 leading-relaxed">
-                {provider.description}
-              </p>
-
-              <Button
-                variant="outline"
-                className="group/btn w-full"
-              >
-                View Profile
-                <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-              </Button>
-            </div>
+              name={provider.name}
+              credentials={provider.credentials}
+              specialty={provider.specialty}
+              bio={provider.bio}
+              initials={provider.initials}
+              accentColor={provider.accentColor}
+              index={index}
+            />
           ))}
         </div>
       </div>
