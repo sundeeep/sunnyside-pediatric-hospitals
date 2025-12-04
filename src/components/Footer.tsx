@@ -113,7 +113,7 @@ const Footer = () => {
                       </div>
                       <div className="flex items-center gap-3">
                         {isToday && timeRemaining && (
-                          <span className="text-xs font-body text-foreground bg-secondary px-2 py-1 rounded-full">
+                          <span className="text-xs font-body text-foreground bg-primary/20 px-2 py-1 rounded-full">
                             {formatTimeRemaining()}
                           </span>
                         )}
