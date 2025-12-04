@@ -169,20 +169,6 @@ const ProviderCardPremium = ({
               </button>
             </div>
           </div>
-
-          {/* Shimmer Effect */}
-          <div
-            className="absolute inset-0 rounded-2xl z-30 pointer-events-none transition-opacity duration-300"
-            style={{
-              background: `linear-gradient(
-                ${105 + mousePosition.x * 2}deg,
-                transparent 40%,
-                hsl(0 0% 100% / ${isHovered ? 0.15 : 0}) 50%,
-                transparent 60%
-              )`,
-              opacity: isHovered ? 1 : 0,
-            }}
-          />
         </div>
 
         {/* Bottom Sheet Overlay - Blurred Image with Bio */}
