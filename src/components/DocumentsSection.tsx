@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 const DocumentsSection = () => {
   return (
-    <section id="documents" className="py-16 bg-background">
+    <section id="documents" className="py-16 bg-cream-dark">
       <div className="container mx-auto">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
