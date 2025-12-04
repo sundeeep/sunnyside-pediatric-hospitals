@@ -1,4 +1,5 @@
-import { Sun, Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
+import logo from "@/assets/logo.svg";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -9,18 +10,12 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-10 mb-10">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                <Sun className="w-6 h-6 text-primary-foreground" />
-              </div>
-              <div>
-                <h3 className="font-heading font-bold text-lg text-background">
-                  Sunnyside
-                </h3>
-                <p className="font-body text-xs text-background/60 -mt-1">
-                  Pediatrics
-                </p>
-              </div>
+            <div className="mb-4">
+              <img 
+                src={logo} 
+                alt="Sunnyside Pediatrics" 
+                className="h-12 w-auto brightness-0 invert"
+              />
             </div>
             <p className="font-body text-sm text-background/70 leading-relaxed">
               Providing compassionate, expert pediatric care for families in our
