@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
-import { Phone, Mail, MapPin, Printer, Navigation, Send, User, MessageSquare, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Printer, Navigation, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/logo.svg";
 
 const schedule = [
@@ -20,16 +17,6 @@ const dayOrder = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satur
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-
-  // Office hours time tracking
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
@@ -74,22 +61,6 @@ const Footer = () => {
   const [isMapHovered, setIsMapHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    toast({
-      title: "Message Sent!",
-      description: "We'll get back to you as soon as possible.",
-    });
-    setFormData({ name: "", email: "", phone: "", message: "" });
-    setIsSubmitting(false);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
   const handleMapMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setMousePosition({ x: (e.clientX - rect.left) / rect.width, y: (e.clientY - rect.top) / rect.height });
@@ -106,128 +77,65 @@ const Footer = () => {
 
   return (
     <footer className="bg-cream-dark">
-      {/* Office Hours Section */}
-      <div className="py-12 border-b border-border">
-        <div className="container mx-auto">
-          <div className="max-w-2xl mx-auto">
-            <div className="bg-background rounded-xl shadow-soft overflow-hidden">
-              {dayOrder.map((dayName) => {
-                const item = schedule.find((s) => s.day === dayName)!;
-                const isToday = dayName === today;
-                const isClosed = item.hours === "Closed";
-
-                return (
-                  <div
-                    key={item.day}
-                    className={`flex items-center justify-between px-6 py-4 border-b border-border last:border-b-0 transition-colors ${
-                      isToday ? "bg-primary/10" : "hover:bg-muted/50"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      {isToday && (
-                        <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                      )}
-                      <span className={`font-heading font-semibold ${isToday ? "text-primary" : "text-foreground"}`}>
-                        {item.day}
-                        {isToday && (
-                          <span className="ml-2 text-xs font-body text-primary/80">(Today)</span>
-                        )}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      {isToday && timeRemaining && (
-                        <span className="text-xs font-body text-foreground bg-primary/20 px-2 py-1 rounded-full">
-                          {formatTimeRemaining()}
-                        </span>
-                      )}
-                      <span className={`font-body ${isClosed ? "text-muted-foreground" : isToday ? "text-primary font-medium" : "text-foreground"}`}>
-                        {item.hours}
-                      </span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-            <p className="text-center mt-6 font-body text-sm text-muted-foreground">
-              For after-hours emergencies, please call{" "}
-              <a href="tel:555-123-4567" className="text-primary hover:underline font-semibold">
-                (555) 123-4567
-              </a>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Contact Section */}
+      {/* Office Hours & Contact Section - Side by Side on Desktop */}
       <div id="contact" className="py-12 border-b border-border">
         <div className="container mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {/* Contact Form */}
-            <div className="bg-card rounded-xl p-8 shadow-soft h-full">
-              <h3 className="font-heading text-card-title text-foreground mb-6 flex items-center gap-2">
-                <MessageSquare className="w-6 h-6 text-primary" />
-                Request an Appointment
-              </h3>
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div className="relative">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                    <Input
-                      name="name"
-                      placeholder="Your Name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="pl-10 h-12 bg-background border-border focus:border-primary"
-                    />
-                  </div>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                    <Input
-                      name="email"
-                      type="email"
-                      placeholder="Email Address"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="pl-10 h-12 bg-background border-border focus:border-primary"
-                    />
-                  </div>
-                </div>
-                <div className="relative">
-                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <Input
-                    name="phone"
-                    type="tel"
-                    placeholder="Phone Number"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="pl-10 h-12 bg-background border-border focus:border-primary"
-                  />
-                </div>
-                <Textarea
-                  name="message"
-                  placeholder="Tell us about your appointment needs..."
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={4}
-                  className="bg-background border-border focus:border-primary resize-none"
-                />
-                <Button type="submit" variant="default" className="w-full h-12" disabled={isSubmitting}>
-                  {isSubmitting ? "Sending..." : (
-                    <>
-                      <Send className="w-5 h-5" />
-                      Send Message
-                    </>
-                  )}
-                </Button>
-              </form>
+            {/* Office Hours */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <Clock className="w-5 h-5 text-primary" />
+                <h3 className="font-heading text-lg font-semibold text-foreground">Office Hours</h3>
+              </div>
+              <div className="bg-background rounded-xl shadow-soft overflow-hidden">
+                {dayOrder.map((dayName) => {
+                  const item = schedule.find((s) => s.day === dayName)!;
+                  const isToday = dayName === today;
+                  const isClosed = item.hours === "Closed";
+
+                  return (
+                    <div
+                      key={item.day}
+                      className={`flex items-center justify-between px-6 py-3 border-b border-border last:border-b-0 transition-colors ${
+                        isToday ? "bg-primary/10" : "hover:bg-muted/50"
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        {isToday && (
+                          <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                        )}
+                        <span className={`font-heading font-semibold text-sm ${isToday ? "text-primary" : "text-foreground"}`}>
+                          {item.day}
+                          {isToday && (
+                            <span className="ml-2 text-xs font-body text-primary/80">(Today)</span>
+                          )}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        {isToday && timeRemaining && (
+                          <span className="text-xs font-body text-foreground bg-primary/20 px-2 py-1 rounded-full">
+                            {formatTimeRemaining()}
+                          </span>
+                        )}
+                        <span className={`font-body text-sm ${isClosed ? "text-muted-foreground" : isToday ? "text-primary font-medium" : "text-foreground"}`}>
+                          {item.hours}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <p className="text-center mt-4 font-body text-sm text-muted-foreground">
+                For after-hours emergencies, please call{" "}
+                <a href="tel:555-123-4567" className="text-primary hover:underline font-semibold">
+                  (555) 123-4567
+                </a>
+              </p>
             </div>
 
             {/* Map Card */}
             <div
-              className="relative h-full min-h-[500px] rounded-xl overflow-hidden cursor-pointer group"
+              className="relative h-full min-h-[400px] lg:min-h-[450px] rounded-xl overflow-hidden cursor-pointer group"
               onMouseEnter={() => setIsMapHovered(true)}
               onMouseLeave={() => setIsMapHovered(false)}
               onMouseMove={handleMapMouseMove}
@@ -262,47 +170,48 @@ const Footer = () => {
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Office Location"
               />
-              <div className="absolute bottom-0 left-0 right-0 p-6 z-30">
-                <div className="backdrop-blur-xl bg-card/80 rounded-xl p-6 shadow-soft border border-border/50">
-                  <h3 className="font-heading text-lg font-semibold text-foreground mb-4">Contact Information</h3>
-                  <div className="space-y-4">
+              <div className="absolute bottom-0 left-0 right-0 p-4 z-30">
+                <div className="backdrop-blur-xl bg-card/80 rounded-xl p-4 shadow-soft border border-border/50">
+                  <h3 className="font-heading text-base font-semibold text-foreground mb-3">Contact Information</h3>
+                  <div className="space-y-3">
                     <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <MapPin className="w-5 h-5 text-primary" />
+                      <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <MapPin className="w-4 h-4 text-primary" />
                       </div>
                       <div>
-                        <p className="font-heading font-semibold text-foreground text-sm">Address</p>
-                        <p className="font-body text-sm text-muted-foreground">
+                        <p className="font-heading font-semibold text-foreground text-xs">Address</p>
+                        <p className="font-body text-xs text-muted-foreground">
                           123 Sunshine Boulevard, Suite 200<br />Sunnyville, CA 90210
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-6">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                          <Phone className="w-5 h-5 text-secondary" />
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <Phone className="w-4 h-4 text-secondary" />
                         </div>
                         <div>
-                          <p className="font-heading font-semibold text-foreground text-sm">Phone</p>
-                          <a href="tel:555-123-4567" className="font-body text-sm text-muted-foreground hover:text-primary transition-colors">
+                          <p className="font-heading font-semibold text-foreground text-xs">Phone</p>
+                          <a href="tel:555-123-4567" className="font-body text-xs text-muted-foreground hover:text-primary transition-colors">
                             (555) 123-4567
                           </a>
                         </div>
                       </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
-                          <Printer className="w-5 h-5 text-muted-foreground" />
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
+                          <Printer className="w-4 h-4 text-muted-foreground" />
                         </div>
                         <div>
-                          <p className="font-heading font-semibold text-foreground text-sm">Fax</p>
-                          <p className="font-body text-sm text-muted-foreground">(555) 123-4568</p>
+                          <p className="font-heading font-semibold text-foreground text-xs">Fax</p>
+                          <p className="font-body text-xs text-muted-foreground">(555) 123-4568</p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="mt-4">
+                  <div className="mt-3">
                     <Button
                       variant="outline"
+                      size="sm"
                       className="w-full"
                       onClick={() => window.open('https://maps.google.com/?q=123+Sunshine+Boulevard+Suite+200+Sunnyville+CA+90210', '_blank')}
                     >
