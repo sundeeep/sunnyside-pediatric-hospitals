@@ -217,13 +217,14 @@ const ProviderCardPremium = ({
 
             {/* Bio Paragraph - Simple p tag with staggered animation */}
             <p 
-              className={`font-body text-sm text-white/95 leading-relaxed text-center max-w-sm transition-all duration-700 ${
+              className={`font-body text-base text-white leading-relaxed text-center max-w-sm transition-all duration-700 drop-shadow-lg ${
                 isDetailOpen 
                   ? "opacity-100 translate-y-0" 
                   : "opacity-0 translate-y-4"
               }`}
               style={{
                 transitionDelay: isDetailOpen ? "0.2s" : "0s",
+                textShadow: "0 2px 8px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3)",
               }}
             >
               {bio}
