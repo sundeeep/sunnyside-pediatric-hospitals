@@ -7,6 +7,7 @@ import newbornCareImage from "@/assets/services/newborn-care.png";
 import wellChecksImage from "@/assets/services/well-checks.png";
 import sickVisitsImage from "@/assets/services/sick-visits.png";
 import behavioralIssuesImage from "@/assets/services/behavioral-issues.png";
+import immunizationsImage from "@/assets/services/immunizations.png";
 
 // Premium services with full content
 const premiumServices = [
@@ -40,16 +41,16 @@ const premiumServices = [
     description: "We help assess and manage emotional or behavioral concerns like anxiety, attention issues, or mood changes. Early support and guidance help children navigate challenges. We partner with families for wellbeing and development.",
     thumbnail: behavioralIssuesImage,
   },
+  {
+    title: "Immunizations",
+    tagline: "Protection through vaccines.",
+    description: "We follow recommended vaccination schedules to protect children from serious diseases. Safe administration and clear guidance help families stay on track. Immunizations also help build community health and prevention.",
+    thumbnail: immunizationsImage,
+  },
 ];
 
 // Other services with simple flip cards
 const services = [
-  {
-    icon: "💉",
-    title: "Immunizations",
-    subtitle: "Safe, scheduled vaccines",
-    summary: "Safe, scheduled vaccines for all age groups.",
-  },
   {
     icon: "⚽",
     title: "Sports Physicals",
