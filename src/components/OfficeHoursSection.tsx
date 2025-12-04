@@ -122,7 +122,7 @@ const OfficeHoursSection = () => {
                   </div>
                   <div className="flex items-center gap-4">
                     {isToday && timeRemaining && (
-                      <span className="text-xs font-body text-primary/80 bg-primary/10 px-2 py-1 rounded-full">
+                      <span className="text-xs font-body text-foreground bg-primary/20 px-2 py-1 rounded-full">
                         {formatTimeRemaining()}
                       </span>
                     )}
