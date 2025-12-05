@@ -237,7 +237,16 @@ const Footer = () => {
             {/* Brand */}
             <div>
               <div className="mb-4">
-                <img src={logo} alt="Sunnyside Pediatrics" className="h-12 w-auto" />
+                <a 
+                  href="#home" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick("#home");
+                  }}
+                  className="inline-block hover:opacity-80 transition-opacity"
+                >
+                  <img src={logo} alt="Sunnyside Pediatrics" className="h-12 w-auto" />
+                </a>
               </div>
               <p className="font-body text-sm text-muted-foreground leading-relaxed">
                 Providing compassionate, expert pediatric care for families in our community since 2005.
