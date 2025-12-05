@@ -134,7 +134,7 @@ const ServiceCardPremium = ({
             >
               {/* Gradient overlay for bottom */}
               <div 
-                className="absolute inset-0 -top-20"
+                className="absolute inset-0 -top-20 pointer-events-none"
                 style={{
                   background: `linear-gradient(
                     to top,
