@@ -39,12 +39,13 @@ const ServiceCardPremium = ({
       >
         {/* ===== FRONT SIDE ===== */}
         <div
-          className="absolute inset-0 rounded-2xl overflow-hidden"
+          className="absolute inset-0 rounded-2xl overflow-hidden cursor-pointer"
           style={{ 
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
             zIndex: isFlipped ? 0 : 1,
           }}
+          onClick={() => setIsFlipped(true)}
         >
           {/* Border */}
           <div
