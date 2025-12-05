@@ -31,14 +31,22 @@ const ServiceCardPremium = ({
     setIsHovered(false);
   };
 
+  const handleMoreClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsFlipped(true);
+  };
+
+  const handleFlipBack = () => {
+    setIsFlipped(false);
+  };
+
   return (
     <div
-      className="service-card-premium aspect-[4/3] opacity-0 animate-fade-in cursor-pointer"
+      className="service-card-premium aspect-[4/3] opacity-0 animate-fade-in"
       style={{ 
         animationDelay: `${0.05 + index * 0.04}s`,
         perspective: "1200px",
       }}
-      onClick={() => setIsFlipped(!isFlipped)}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
@@ -93,58 +101,93 @@ const ServiceCardPremium = ({
               }}
             />
 
-            {/* Glassy Overlay Gradient */}
+            {/* Top-Left Glassy Capsule - Visible by default, hidden on hover */}
             <div 
-              className="absolute inset-0 transition-opacity duration-300"
+              className="absolute top-4 left-4 z-30 transition-all duration-300 ease-out"
               style={{
-                background: `linear-gradient(
-                  to top,
-                  hsl(0 0% 0% / 0.7) 0%,
-                  hsl(0 0% 0% / 0.4) 40%,
-                  hsl(0 0% 0% / 0.1) 70%,
-                  transparent 100%
-                )`,
-              }}
-            />
-
-            {/* Glassy Bottom Panel */}
-            <div 
-              className="absolute bottom-0 left-0 right-0 p-6 transition-all duration-300"
-              style={{
-                background: isHovered 
-                  ? "hsl(0 0% 100% / 0.15)"
-                  : "hsl(0 0% 100% / 0.1)",
-                backdropFilter: "blur(12px) saturate(180%)",
-                WebkitBackdropFilter: "blur(12px) saturate(180%)",
+                opacity: isHovered ? 0 : 1,
+                transform: `translateY(${isHovered ? -10 : 0}px)`,
               }}
             >
-              {/* Sun Glow Effect */}
               <div 
-                className="absolute -top-8 left-1/2 -translate-x-1/2 w-24 h-8 transition-opacity duration-300"
+                className="px-4 py-2 rounded-full"
                 style={{
-                  background: `radial-gradient(ellipse at center, hsl(var(--sun-yellow) / ${isHovered ? 0.4 : 0.2}) 0%, transparent 70%)`,
+                  background: "hsl(0 0% 100% / 0.2)",
+                  backdropFilter: "blur(12px) saturate(180%)",
+                  WebkitBackdropFilter: "blur(12px) saturate(180%)",
+                  border: "1px solid hsl(0 0% 100% / 0.3)",
+                }}
+              >
+                <span className="font-heading text-sm font-semibold text-white drop-shadow-md">
+                  {title}
+                </span>
+              </div>
+            </div>
+
+            {/* Glassy Bottom Panel - Hidden by default, visible on hover */}
+            <div 
+              className="absolute bottom-0 left-0 right-0 transition-all duration-400 ease-out"
+              style={{
+                opacity: isHovered ? 1 : 0,
+                transform: `translateY(${isHovered ? 0 : 100}%)`,
+              }}
+            >
+              {/* Gradient overlay for bottom */}
+              <div 
+                className="absolute inset-0 -top-20"
+                style={{
+                  background: `linear-gradient(
+                    to top,
+                    hsl(0 0% 0% / 0.6) 0%,
+                    hsl(0 0% 0% / 0.3) 50%,
+                    transparent 100%
+                  )`,
                 }}
               />
               
-              <h3 className="font-heading text-xl font-bold text-white mb-1 drop-shadow-lg">
-                {title}
-              </h3>
-              <p className="font-body text-sm text-white/80 drop-shadow-md">
-                {tagline}
-              </p>
-
-              {/* Micro-interaction indicator */}
               <div 
-                className="absolute bottom-3 right-4 flex items-center gap-1 text-white/60 text-xs transition-all duration-300"
+                className="relative p-5"
                 style={{
-                  opacity: isHovered ? 1 : 0,
-                  transform: `translateX(${isHovered ? 0 : 10}px)`,
+                  background: "hsl(0 0% 100% / 0.15)",
+                  backdropFilter: "blur(16px) saturate(180%)",
+                  WebkitBackdropFilter: "blur(16px) saturate(180%)",
+                  borderTop: "1px solid hsl(0 0% 100% / 0.2)",
                 }}
               >
-                <span>Tap to flip</span>
-                <svg className="w-4 h-4 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
+                {/* Sun Glow Effect */}
+                <div 
+                  className="absolute -top-6 left-1/2 -translate-x-1/2 w-20 h-6"
+                  style={{
+                    background: `radial-gradient(ellipse at center, hsl(var(--sun-yellow) / 0.35) 0%, transparent 70%)`,
+                  }}
+                />
+                
+                <h3 className="font-heading text-lg font-bold text-white mb-1 drop-shadow-lg">
+                  {title}
+                </h3>
+                <p className="font-body text-sm text-white/80 drop-shadow-md mb-3">
+                  {tagline}
+                </p>
+
+                {/* Yellow More Button */}
+                <button
+                  onClick={handleMoreClick}
+                  className="group inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full font-body text-sm font-medium transition-all duration-300 hover:scale-105 active:scale-95"
+                  style={{
+                    background: `linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--sun-yellow-light)) 100%)`,
+                    boxShadow: "0 4px 12px -2px hsl(var(--sun-yellow) / 0.4)",
+                  }}
+                >
+                  <span className="text-primary-foreground">More</span>
+                  <svg 
+                    className="w-4 h-4 text-primary-foreground transition-transform duration-300 group-hover:translate-x-0.5" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
               </div>
             </div>
           </div>
@@ -166,11 +209,12 @@ const ServiceCardPremium = ({
 
         {/* Back Side */}
         <div
-          className="absolute inset-0 rounded-2xl overflow-hidden"
+          className="absolute inset-0 rounded-2xl overflow-hidden cursor-pointer"
           style={{ 
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
           }}
+          onClick={handleFlipBack}
         >
           {/* Sun Ray Border Effect for Back */}
           <div 
@@ -193,7 +237,7 @@ const ServiceCardPremium = ({
 
           {/* Glass Content Panel */}
           <div 
-            className="absolute inset-[2px] rounded-2xl p-6 flex flex-col justify-center items-center text-center"
+            className="absolute inset-[2px] rounded-2xl p-6 flex flex-col"
             style={{
               background: `linear-gradient(
                 135deg,
@@ -213,33 +257,32 @@ const ServiceCardPremium = ({
               />
             </div>
 
-            <h3 className="font-heading text-xl font-bold text-foreground mb-4">
+            <h3 className="font-heading text-xl font-bold text-foreground mb-3 text-center">
               {title}
             </h3>
             
-            <p className="font-body text-body text-muted-foreground leading-relaxed mb-6 max-w-[90%]">
-              {description}
-            </p>
-
-            <button 
-              className="group relative px-6 py-2.5 rounded-full font-body text-sm font-medium overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95"
+            {/* Scrollable Description */}
+            <div 
+              className="flex-1 overflow-y-auto pr-1"
               style={{
-                background: `linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--sun-yellow-light)) 100%)`,
-                boxShadow: "0 4px 15px -3px hsl(var(--sun-yellow) / 0.4)",
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
               }}
-              onClick={(e) => e.stopPropagation()}
             >
-              <span className="relative z-10 text-primary-foreground">Learn More</span>
-              <div 
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{
-                  background: `linear-gradient(135deg, hsl(var(--sun-yellow-dark)) 0%, hsl(var(--primary)) 100%)`,
-                }}
-              />
-            </button>
+              <style>
+                {`
+                  .hide-scrollbar::-webkit-scrollbar {
+                    display: none;
+                  }
+                `}
+              </style>
+              <p className="font-body text-body text-muted-foreground leading-relaxed hide-scrollbar">
+                {description}
+              </p>
+            </div>
 
             {/* Tap indicator */}
-            <p className="absolute bottom-4 text-xs text-muted-foreground/60">
+            <p className="text-xs text-muted-foreground/60 text-center mt-4">
               Tap to flip back
             </p>
           </div>
