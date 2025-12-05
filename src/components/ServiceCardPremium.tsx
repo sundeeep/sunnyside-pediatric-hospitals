@@ -63,6 +63,7 @@ const ServiceCardPremium = ({
             <img
               src={thumbnail}
               alt={title}
+              loading="lazy"
               className="w-full h-full object-cover transition-transform duration-500"
               style={{ transform: isHovered ? "scale(1.05)" : "scale(1)" }}
             />
