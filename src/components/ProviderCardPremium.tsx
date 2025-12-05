@@ -197,49 +197,55 @@ const ProviderCardPremium = ({
           />
 
           {/* Bio Content on Blurred Image */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
-            {/* Close Button */}
+          <div className="absolute inset-0 flex flex-col p-6">
+            {/* Close Button - Fixed at top */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 setIsDetailOpen(false);
               }}
-              className="absolute top-4 right-4 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
+              className="absolute top-4 right-4 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors z-10"
             >
               <X className="w-5 h-5 text-white" />
             </button>
 
-            {/* Bio Paragraph - Simple p tag with staggered animation */}
-            <p 
-              className={`font-body text-base text-white leading-relaxed text-center max-w-sm transition-all duration-700 drop-shadow-lg ${
-                isDetailOpen 
-                  ? "opacity-100 translate-y-0" 
-                  : "opacity-0 translate-y-4"
-              }`}
-              style={{
-                transitionDelay: isDetailOpen ? "0.2s" : "0s",
-                textShadow: "0 2px 8px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3)",
-              }}
+            {/* Scrollable Content Area */}
+            <div 
+              className="flex-1 overflow-y-auto flex flex-col items-center justify-center [&::-webkit-scrollbar]:hidden"
+              style={{ scrollbarWidth: "none" }}
             >
-              {bio}
-            </p>
+              {/* Bio Paragraph */}
+              <p 
+                className={`font-body text-base text-white leading-relaxed text-center max-w-sm transition-all duration-700 drop-shadow-lg ${
+                  isDetailOpen 
+                    ? "opacity-100 translate-y-0" 
+                    : "opacity-0 translate-y-4"
+                }`}
+                style={{
+                  transitionDelay: isDetailOpen ? "0.2s" : "0s",
+                  textShadow: "0 2px 8px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3)",
+                }}
+              >
+                {bio}
+              </p>
 
-            {/* Book Appointment Button */}
-            <Button
-              variant="hero"
-              className={`mt-6 w-full max-w-xs transition-all duration-700 ${
-                isDetailOpen 
-                  ? "opacity-100 translate-y-0" 
-                  : "opacity-0 translate-y-4"
-              }`}
-              style={{
-                transitionDelay: isDetailOpen ? "0.4s" : "0s",
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Calendar className="w-4 h-4 mr-2" />
-              Book Appointment
-            </Button>
+              {/* Book Appointment Button */}
+              <Button
+                variant="hero"
+                className={`mt-6 w-full max-w-xs shrink-0 transition-all duration-700 ${
+                  isDetailOpen 
+                    ? "opacity-100 translate-y-0" 
+                    : "opacity-0 translate-y-4"
+                }`}
+                style={{
+                  transitionDelay: isDetailOpen ? "0.4s" : "0s",
+                }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Calendar className="w-4 h-4 mr-2" />
+                Book Appointment
+              </Button>
+            </div>
           </div>
         </div>
 
