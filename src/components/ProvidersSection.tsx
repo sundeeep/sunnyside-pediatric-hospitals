@@ -29,7 +29,7 @@ const ProvidersSection = () => {
     <section id="providers" className="py-16 md:py-24 bg-cream-dark">
       <div className="container mx-auto px-4">
         <SectionHeader
-          badge="Our Team"
+          badge="Our Doctors"
           title="Meet Our Providers"
           description="Our dedicated team of pediatric specialists is committed to providing exceptional care for your children."
         />
