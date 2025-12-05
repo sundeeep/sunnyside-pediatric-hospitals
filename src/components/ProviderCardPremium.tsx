@@ -177,7 +177,7 @@ const ProviderCardPremium = ({
                 className="h-full overflow-y-auto py-2 [&::-webkit-scrollbar]:hidden"
                 style={{ scrollbarWidth: "none" }}
               >
-                <p className="font-body text-xs md:text-sm text-muted-foreground leading-relaxed text-center px-1">
+                <p className="font-body text-sm md:text-base text-muted-foreground leading-relaxed text-center px-1">
                   {bio}
                 </p>
               </div>
