@@ -87,6 +87,25 @@ const ServiceCardPremium = ({
               </div>
             </div>
 
+            {/* More Capsule - Bottom Right (Mobile/Tablet only) */}
+            <button
+              type="button"
+              onClick={() => setIsFlipped(true)}
+              className="absolute bottom-4 right-4 lg:hidden cursor-pointer"
+            >
+              <div
+                className="px-3 py-1.5 rounded-full"
+                style={{
+                  background: `linear-gradient(135deg, hsl(var(--sun-yellow)) 0%, hsl(var(--sun-yellow-light)) 100%)`,
+                  boxShadow: "0 3px 15px -2px hsl(var(--sun-yellow) / 0.5)",
+                }}
+              >
+                <span className="font-heading text-xs font-semibold text-foreground">
+                  more
+                </span>
+              </div>
+            </button>
+
             {/* Bottom Panel on Hover */}
             <div
               className="absolute bottom-0 left-0 right-0 transition-all duration-300"
