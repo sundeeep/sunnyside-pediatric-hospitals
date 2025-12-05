@@ -169,12 +169,18 @@ const ServiceCardPremium = ({
                   {/* More Link */}
                   <button
                     onClick={handleMoreClick}
-                    className="font-body text-sm font-medium cursor-pointer transition-all duration-300 hover:opacity-80 relative z-50 shrink-0"
+                    className="group font-body text-sm font-medium cursor-pointer transition-all duration-300 relative z-50 shrink-0"
                     style={{
                       color: "hsl(var(--sun-yellow))",
                     }}
                   >
-                    more
+                    <span className="relative">
+                      more
+                      <span 
+                        className="absolute bottom-0 left-0 w-full h-[1px] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+                        style={{ backgroundColor: "hsl(var(--sun-yellow))" }}
+                      />
+                    </span>
                   </button>
                 </div>
                 <p className="font-body text-sm text-white/80 drop-shadow-md">
