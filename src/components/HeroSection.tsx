@@ -20,7 +20,7 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="container mx-auto relative z-10">
-        <div className="max-w-2xl">
+        <div className="max-w-3xl mx-auto text-center">
           <div
             className="opacity-0 animate-fade-in"
             style={{ animationDelay: "0.1s" }}
@@ -40,16 +40,16 @@ const HeroSection = () => {
           </h1>
 
           <p
-            className="font-body text-lg sm:text-xl text-foreground/80 mb-10 leading-relaxed opacity-0 animate-slide-up"
+            className="font-body text-lg sm:text-xl text-foreground/80 mb-10 leading-relaxed opacity-0 animate-slide-up max-w-2xl mx-auto"
             style={{ animationDelay: "0.3s" }}
           >
-            Sunnyside Pediatrics provides compassionate, expert care for
-            children of all ages. From newborns to teens, we're here to support
-            your family's health journey.
+            Compassionate, expert care for children of all ages.
+            <br />
+            From newborns to teens, we're here for your family.
           </p>
 
           <div
-            className="flex flex-col sm:flex-row gap-4 opacity-0 animate-slide-up"
+            className="flex flex-col sm:flex-row gap-4 justify-center opacity-0 animate-slide-up"
             style={{ animationDelay: "0.4s" }}
           >
             <Button variant="hero" size="lg">
@@ -60,25 +60,6 @@ const HeroSection = () => {
               <Users className="w-5 h-5" />
               Meet Our Providers
             </Button>
-          </div>
-
-          {/* Trust Indicators */}
-          <div
-            className="mt-12 flex flex-wrap gap-6 opacity-0 animate-fade-in"
-            style={{ animationDelay: "0.6s" }}
-          >
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-              <span className="font-body text-sm text-foreground/70">
-                Accepting New Patients
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-secondary rounded-full" />
-              <span className="font-body text-sm text-foreground/70">
-                Most Insurance Accepted
-              </span>
-            </div>
           </div>
         </div>
       </div>
