@@ -15,8 +15,11 @@ const HeroSection = () => {
           alt="Sunny pediatric care illustration"
           className="w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/20 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/10 to-cream-dark" />
       </div>
+      
+      {/* Bottom gradient fade for smooth transition */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-cream-dark via-cream-dark/80 to-transparent z-[1]" />
 
       {/* Content */}
       <div className="container mx-auto relative z-10">
