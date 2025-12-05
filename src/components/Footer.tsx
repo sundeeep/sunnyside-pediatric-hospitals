@@ -105,14 +105,9 @@ const Footer = () => {
                           {isToday && (
                             <span className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
                           )}
-                          <div className="flex items-center gap-2">
-                            <span className="font-heading font-bold text-foreground">
-                              {item.day}
-                            </span>
-                            {isToday && (
-                              <span className="text-xs font-body text-primary font-medium">(Today)</span>
-                            )}
-                          </div>
+                          <span className="font-heading font-bold text-foreground">
+                            {item.day}
+                          </span>
                         </div>
                         <div className="flex items-center gap-3">
                           {isToday && timeRemaining && (
