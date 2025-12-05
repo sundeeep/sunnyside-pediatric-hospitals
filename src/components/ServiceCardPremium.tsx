@@ -125,10 +125,11 @@ const ServiceCardPremium = ({
 
             {/* Glassy Bottom Panel - Hidden by default, visible on hover */}
             <div 
-              className="absolute bottom-0 left-0 right-0 transition-all duration-400 ease-out"
+              className="absolute bottom-0 left-0 right-0 z-40 transition-all duration-400 ease-out"
               style={{
                 opacity: isHovered ? 1 : 0,
                 transform: `translateY(${isHovered ? 0 : 100}%)`,
+                pointerEvents: isHovered ? "auto" : "none",
               }}
             >
               {/* Gradient overlay for bottom */}
@@ -171,7 +172,7 @@ const ServiceCardPremium = ({
                 {/* Yellow More Button */}
                 <button
                   onClick={handleMoreClick}
-                  className="group inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full font-body text-sm font-medium transition-all duration-300 hover:scale-105 active:scale-95"
+                  className="group inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full font-body text-sm font-medium cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95 relative z-50"
                   style={{
                     background: `linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--sun-yellow-light)) 100%)`,
                     boxShadow: "0 4px 12px -2px hsl(var(--sun-yellow) / 0.4)",
