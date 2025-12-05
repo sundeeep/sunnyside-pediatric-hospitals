@@ -121,23 +121,23 @@ const ProviderCardPremium = ({
             className="absolute inset-0 rounded-2xl overflow-hidden"
             onClick={() => setIsDetailOpen(false)}
           >
-            {/* Background Image */}
+            {/* Background Image with blur */}
             <img
               src={image}
               alt={name}
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover blur-sm"
             />
             
-            {/* Dark Overlay - No blur */}
+            {/* Subtle dark tint */}
             <div
               className="absolute inset-0"
               style={{
-                background: "rgba(0,0,0,0.6)",
+                background: "rgba(0,0,0,0.4)",
               }}
             />
 
             {/* Content */}
-            <div className="absolute inset-0 flex flex-col p-6 pt-16 pb-6">
+            <div className="absolute inset-0 flex flex-col p-6 pt-14 pb-6">
               {/* Close Button */}
               <button
                 type="button"
@@ -150,19 +150,19 @@ const ProviderCardPremium = ({
                 <X className="w-5 h-5 text-white" />
               </button>
 
-              {/* Scrollable Bio Content with fade indicators */}
+              {/* Scrollable Bio Content with smooth fade */}
               <div className="flex-1 relative overflow-hidden">
-                {/* Top fade gradient */}
+                {/* Top fade gradient - smooth blur effect */}
                 <div 
-                  className="absolute top-0 left-0 right-0 h-6 z-10 pointer-events-none"
+                  className="absolute top-0 left-0 right-0 h-8 z-10 pointer-events-none"
                   style={{
-                    background: "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%)",
+                    background: "linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)",
                   }}
                 />
                 
                 {/* Scrollable content */}
                 <div
-                  className="h-full overflow-y-auto py-4 [&::-webkit-scrollbar]:hidden"
+                  className="h-full overflow-y-auto py-6 [&::-webkit-scrollbar]:hidden"
                   style={{ scrollbarWidth: "none" }}
                 >
                   <p className="font-body text-sm md:text-base text-white leading-relaxed text-center px-2 drop-shadow-lg">
@@ -170,11 +170,11 @@ const ProviderCardPremium = ({
                   </p>
                 </div>
                 
-                {/* Bottom fade gradient */}
+                {/* Bottom fade gradient - smooth blur effect */}
                 <div 
-                  className="absolute bottom-0 left-0 right-0 h-8 z-10 pointer-events-none"
+                  className="absolute bottom-0 left-0 right-0 h-10 z-10 pointer-events-none"
                   style={{
-                    background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)",
+                    background: "linear-gradient(to top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)",
                   }}
                 />
               </div>
