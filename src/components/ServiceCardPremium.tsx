@@ -16,23 +16,9 @@ const ServiceCardPremium = ({
   index = 0,
 }: ServiceCardPremiumProps) => {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
-    setMousePosition({ x, y });
-  };
-
-  const handleMouseLeave = () => {
-    setMousePosition({ x: 0, y: 0 });
-    setIsHovered(false);
-  };
-
-  const handleMoreClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handleMoreClick = () => {
     setIsFlipped(true);
   };
 
@@ -43,37 +29,32 @@ const ServiceCardPremium = ({
   return (
     <div
       className="service-card-premium aspect-[4/3] opacity-0 animate-fade-in"
-      style={{ 
+      style={{
         animationDelay: `${0.05 + index * 0.04}s`,
         perspective: "1200px",
       }}
-      onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
+      onMouseLeave={() => setIsHovered(false)}
     >
+      {/* Card Container with 3D Transform */}
       <div
-        className="relative w-full h-full transition-all duration-500 ease-out"
+        className="relative w-full h-full transition-transform duration-500 ease-out"
         style={{
           transformStyle: "preserve-3d",
-          transform: `
-            rotateY(${isFlipped ? 180 : 0}deg) 
-            rotateX(${isHovered && !isFlipped ? -mousePosition.y * 0.5 : 0}deg) 
-            rotateY(${isHovered && !isFlipped ? mousePosition.x * 0.5 : isFlipped ? 180 : 0}deg)
-            translateZ(${isHovered ? 20 : 0}px)
-          `,
+          transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
         }}
       >
-        {/* Front Side */}
+        {/* ===== FRONT SIDE ===== */}
         <div
           className="absolute inset-0 rounded-2xl overflow-hidden"
           style={{ backfaceVisibility: "hidden" }}
         >
-          {/* Sun Ray Border Effect */}
-          <div 
-            className="absolute inset-0 rounded-2xl p-[2px] z-10"
+          {/* Border Gradient */}
+          <div
+            className="absolute inset-0 rounded-2xl p-[2px]"
             style={{
               background: `conic-gradient(
-                from ${isHovered ? 180 + mousePosition.x * 3 : 180}deg at 50% 0%,
+                from 180deg at 50% 0%,
                 hsl(var(--sun-yellow)) 0deg,
                 hsl(var(--sun-yellow-light)) 60deg,
                 hsl(var(--sky-blue-light)) 120deg,
@@ -89,31 +70,28 @@ const ServiceCardPremium = ({
             <div className="w-full h-full rounded-2xl bg-card" />
           </div>
 
-          {/* Main Content */}
-          <div className="absolute inset-[2px] rounded-2xl overflow-hidden z-20">
-            {/* Thumbnail Image */}
+          {/* Image */}
+          <div className="absolute inset-[2px] rounded-2xl overflow-hidden">
             <img
               src={thumbnail}
               alt={title}
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out"
-              style={{
-                transform: `scale(${isHovered ? 1.05 : 1})`,
-              }}
+              className="w-full h-full object-cover transition-transform duration-500"
+              style={{ transform: isHovered ? "scale(1.05)" : "scale(1)" }}
             />
 
-            {/* Bottom-Left Yellow Glowing Capsule - Visible by default, hidden on hover */}
-            <div 
-              className="absolute bottom-4 left-4 z-30 transition-all duration-300 ease-out"
+            {/* Yellow Capsule - Bottom Left (visible when not hovered) */}
+            <div
+              className="absolute bottom-4 left-4 transition-all duration-300"
               style={{
                 opacity: isHovered ? 0 : 1,
-                transform: `translateY(${isHovered ? 10 : 0}px)`,
+                transform: isHovered ? "translateY(10px)" : "translateY(0)",
               }}
             >
-              <div 
+              <div
                 className="px-3 py-1.5 rounded-full"
                 style={{
                   background: `linear-gradient(135deg, hsl(var(--sun-yellow)) 0%, hsl(var(--sun-yellow-light)) 100%)`,
-                  boxShadow: "0 3px 15px -2px hsl(var(--sun-yellow) / 0.5), 0 0 20px -5px hsl(var(--sun-yellow) / 0.3)",
+                  boxShadow: "0 3px 15px -2px hsl(var(--sun-yellow) / 0.5)",
                   border: "1px solid hsl(var(--sun-yellow-light) / 0.5)",
                 }}
               >
@@ -123,99 +101,76 @@ const ServiceCardPremium = ({
               </div>
             </div>
 
-            {/* Glassy Bottom Panel - Hidden by default, visible on hover */}
-            <div 
-              className="absolute bottom-0 left-0 right-0 z-40 transition-all duration-400 ease-out"
+            {/* Bottom Panel (visible on hover) */}
+            <div
+              className="absolute bottom-0 left-0 right-0 transition-all duration-300"
               style={{
                 opacity: isHovered ? 1 : 0,
-                transform: `translateY(${isHovered ? 0 : 100}%)`,
-                pointerEvents: isHovered ? "auto" : "none",
+                transform: isHovered ? "translateY(0)" : "translateY(100%)",
               }}
             >
-              {/* Gradient overlay for bottom */}
-              <div 
-                className="absolute inset-0 -top-20 pointer-events-none"
+              {/* Dark gradient background */}
+              <div
+                className="absolute inset-0 -top-16"
                 style={{
-                  background: `linear-gradient(
-                    to top,
-                    hsl(0 0% 0% / 0.6) 0%,
-                    hsl(0 0% 0% / 0.3) 50%,
-                    transparent 100%
-                  )`,
+                  background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)",
+                  pointerEvents: "none",
                 }}
               />
-              
-              <div 
+
+              {/* Content */}
+              <div
                 className="relative p-5"
                 style={{
-                  background: "hsl(0 0% 100% / 0.15)",
-                  backdropFilter: "blur(16px) saturate(180%)",
-                  WebkitBackdropFilter: "blur(16px) saturate(180%)",
-                  borderTop: "1px solid hsl(0 0% 100% / 0.2)",
+                  background: "rgba(255,255,255,0.15)",
+                  backdropFilter: "blur(16px)",
+                  WebkitBackdropFilter: "blur(16px)",
+                  borderTop: "1px solid rgba(255,255,255,0.2)",
                 }}
               >
-                {/* Sun Glow Effect */}
-                <div 
-                  className="absolute -top-6 left-1/2 -translate-x-1/2 w-20 h-6"
-                  style={{
-                    background: `radial-gradient(ellipse at center, hsl(var(--sun-yellow) / 0.35) 0%, transparent 70%)`,
-                  }}
-                />
-                
                 <div className="flex items-start justify-between gap-4">
                   <h3 className="font-heading text-lg font-bold text-white drop-shadow-lg">
                     {title}
                   </h3>
-                  {/* More Link */}
+                  
+                  {/* More Link Button */}
                   <button
+                    type="button"
                     onClick={handleMoreClick}
-                    className="group font-body text-sm font-medium cursor-pointer transition-all duration-300 relative z-50 shrink-0"
-                    style={{
-                      color: "hsl(var(--sun-yellow))",
-                    }}
+                    className="group shrink-0 cursor-pointer"
                   >
-                    <span className="relative">
+                    <span
+                      className="font-body text-sm font-medium relative inline-block"
+                      style={{ color: "hsl(var(--sun-yellow))" }}
+                    >
                       more
-                      <span 
+                      <span
                         className="absolute bottom-0 left-0 w-full h-[1px] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
                         style={{ backgroundColor: "hsl(var(--sun-yellow))" }}
                       />
                     </span>
                   </button>
                 </div>
-                <p className="font-body text-sm text-white/80 drop-shadow-md">
+                
+                <p className="font-body text-sm text-white/80 mt-1">
                   {tagline}
                 </p>
               </div>
             </div>
           </div>
-
-          {/* Shimmer Effect */}
-          <div 
-            className="absolute inset-0 rounded-2xl z-30 pointer-events-none transition-opacity duration-300"
-            style={{
-              background: `linear-gradient(
-                ${105 + mousePosition.x * 2}deg,
-                transparent 40%,
-                hsl(0 0% 100% / ${isHovered ? 0.15 : 0}) 50%,
-                transparent 60%
-              )`,
-              opacity: isHovered ? 1 : 0,
-            }}
-          />
         </div>
 
-        {/* Back Side */}
+        {/* ===== BACK SIDE ===== */}
         <div
           className="absolute inset-0 rounded-2xl overflow-hidden cursor-pointer"
-          style={{ 
+          style={{
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
           }}
           onClick={handleFlipBack}
         >
-          {/* Sun Ray Border Effect for Back */}
-          <div 
+          {/* Border Gradient */}
+          <div
             className="absolute inset-0 rounded-2xl p-[2px]"
             style={{
               background: `conic-gradient(
@@ -233,53 +188,38 @@ const ServiceCardPremium = ({
             <div className="w-full h-full rounded-2xl bg-gradient-to-br from-card via-card to-muted" />
           </div>
 
-          {/* Glass Content Panel */}
-          <div 
+          {/* Content Panel */}
+          <div
             className="absolute inset-[2px] rounded-2xl p-6 flex flex-col"
             style={{
-              background: `linear-gradient(
-                135deg,
-                hsl(var(--cream) / 0.95) 0%,
-                hsl(var(--cream-dark) / 0.98) 100%
-              )`,
-              backdropFilter: "blur(20px)",
+              background: `linear-gradient(135deg, hsl(var(--cream) / 0.95) 0%, hsl(var(--cream-dark) / 0.98) 100%)`,
             }}
           >
-            {/* Decorative Sun Rays */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-16 opacity-30">
-              <div 
-                className="w-full h-full"
-                style={{
-                  background: `radial-gradient(ellipse at center bottom, hsl(var(--sun-yellow)) 0%, transparent 70%)`,
-                }}
-              />
-            </div>
+            {/* Decorative Sun Glow */}
+            <div
+              className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-16 opacity-30 pointer-events-none"
+              style={{
+                background: `radial-gradient(ellipse at center bottom, hsl(var(--sun-yellow)) 0%, transparent 70%)`,
+              }}
+            />
 
             <h3 className="font-heading text-xl font-bold text-foreground mb-3 text-center">
               {title}
             </h3>
-            
+
             {/* Scrollable Description */}
-            <div 
-              className="flex-1 overflow-y-auto pr-1"
+            <div
+              className="flex-1 overflow-y-auto"
               style={{
                 scrollbarWidth: "none",
                 msOverflowStyle: "none",
               }}
             >
-              <style>
-                {`
-                  .hide-scrollbar::-webkit-scrollbar {
-                    display: none;
-                  }
-                `}
-              </style>
-              <p className="font-body text-body text-muted-foreground leading-relaxed hide-scrollbar">
+              <p className="font-body text-sm text-muted-foreground leading-relaxed [&::-webkit-scrollbar]:hidden">
                 {description}
               </p>
             </div>
 
-            {/* Tap indicator */}
             <p className="text-xs text-muted-foreground/60 text-center mt-4">
               Tap to flip back
             </p>
@@ -287,14 +227,14 @@ const ServiceCardPremium = ({
         </div>
       </div>
 
-      {/* Hover Shadow */}
-      <div 
-        className="absolute inset-0 rounded-2xl -z-10 transition-all duration-500"
+      {/* Shadow */}
+      <div
+        className="absolute inset-0 rounded-2xl -z-10 transition-all duration-300"
         style={{
-          boxShadow: isHovered 
-            ? `0 25px 50px -12px hsl(var(--sun-yellow) / 0.25), 0 12px 25px -8px hsl(0 0% 0% / 0.15)`
-            : `0 10px 30px -10px hsl(0 0% 0% / 0.1)`,
-          transform: `translateY(${isHovered ? 8 : 0}px)`,
+          boxShadow: isHovered
+            ? "0 25px 50px -12px hsl(var(--sun-yellow) / 0.25), 0 12px 25px -8px rgba(0,0,0,0.15)"
+            : "0 10px 30px -10px rgba(0,0,0,0.1)",
+          transform: isHovered ? "translateY(8px)" : "translateY(0)",
         }}
       />
     </div>
