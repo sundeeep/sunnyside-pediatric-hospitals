@@ -139,7 +139,7 @@ const ProviderCardPremium = ({
             />
 
             {/* Content */}
-            <div className="absolute inset-0 flex flex-col p-6 pt-14">
+            <div className="absolute inset-0 flex flex-col p-6 pt-16 pb-6">
               {/* Close Button */}
               <button
                 type="button"
@@ -147,19 +147,38 @@ const ProviderCardPremium = ({
                   e.stopPropagation();
                   setIsDetailOpen(false);
                 }}
-                className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center cursor-pointer transition-colors bg-white/20 hover:bg-white/30"
+                className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center cursor-pointer transition-colors bg-white/20 hover:bg-white/30 z-10"
               >
                 <X className="w-5 h-5 text-white" />
               </button>
 
-              {/* Scrollable Bio Content */}
-              <div
-                className="flex-1 overflow-y-auto flex items-center justify-center [&::-webkit-scrollbar]:hidden"
-                style={{ scrollbarWidth: "none" }}
-              >
-                <p className="font-body text-base text-white leading-relaxed text-center max-w-sm drop-shadow-lg">
-                  {bio}
-                </p>
+              {/* Scrollable Bio Content with fade indicators */}
+              <div className="flex-1 relative overflow-hidden">
+                {/* Top fade gradient */}
+                <div 
+                  className="absolute top-0 left-0 right-0 h-6 z-10 pointer-events-none"
+                  style={{
+                    background: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 100%)",
+                  }}
+                />
+                
+                {/* Scrollable content */}
+                <div
+                  className="h-full overflow-y-auto py-4 [&::-webkit-scrollbar]:hidden"
+                  style={{ scrollbarWidth: "none" }}
+                >
+                  <p className="font-body text-base text-white leading-relaxed text-center px-2 drop-shadow-lg">
+                    {bio}
+                  </p>
+                </div>
+                
+                {/* Bottom fade gradient */}
+                <div 
+                  className="absolute bottom-0 left-0 right-0 h-8 z-10 pointer-events-none"
+                  style={{
+                    background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%)",
+                  }}
+                />
               </div>
 
               {/* Sticky Book Appointment Button */}
