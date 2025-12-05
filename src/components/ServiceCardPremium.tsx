@@ -40,7 +40,11 @@ const ServiceCardPremium = ({
         {/* ===== FRONT SIDE ===== */}
         <div
           className="absolute inset-0 rounded-2xl overflow-hidden"
-          style={{ backfaceVisibility: "hidden" }}
+          style={{ 
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+            zIndex: isFlipped ? 0 : 1,
+          }}
         >
           {/* Border */}
           <div
@@ -141,7 +145,9 @@ const ServiceCardPremium = ({
           className="absolute inset-0 rounded-2xl overflow-hidden"
           style={{
             backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
+            zIndex: isFlipped ? 1 : 0,
           }}
         >
           {/* Border */}
