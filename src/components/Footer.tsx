@@ -83,49 +83,53 @@ const Footer = () => {
           <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {/* Office Hours */}
             <div className="flex flex-col items-center">
-              <div className="flex items-center justify-center gap-2 mb-4 w-full">
-                <Clock className="w-5 h-5 text-primary" />
-                <h3 className="font-heading text-lg font-semibold text-foreground">Office Hours</h3>
+              <div className="flex items-center justify-center gap-3 mb-6 w-full">
+                <Clock className="w-6 h-6 text-primary" />
+                <h3 className="font-heading text-xl font-bold text-foreground">Office Hours</h3>
               </div>
-              <div className="bg-background rounded-xl shadow-soft overflow-hidden">
-                {dayOrder.map((dayName) => {
-                  const item = schedule.find((s) => s.day === dayName)!;
-                  const isToday = dayName === today;
-                  const isClosed = item.hours === "Closed";
+              <div className="bg-background rounded-2xl shadow-card p-6 w-full max-w-md">
+                <div className="space-y-4">
+                  {dayOrder.map((dayName) => {
+                    const item = schedule.find((s) => s.day === dayName)!;
+                    const isToday = dayName === today;
+                    const isClosed = item.hours === "Closed";
 
-                  return (
-                    <div
-                      key={item.day}
-                      className={`flex items-center justify-between px-6 py-3 border-b border-border last:border-b-0 transition-colors ${
-                        isToday ? "bg-primary/10" : "hover:bg-muted/50"
-                      }`}
-                    >
-                      <div className="flex items-center gap-3">
-                        {isToday && (
-                          <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                        )}
-                        <span className={`font-heading font-semibold text-sm ${isToday ? "text-primary" : "text-foreground"}`}>
-                          {item.day}
+                    return (
+                      <div
+                        key={item.day}
+                        className={`flex items-center justify-between py-3 px-4 rounded-xl transition-all ${
+                          isToday ? "bg-primary/10 border border-primary/20" : ""
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
                           {isToday && (
-                            <span className="ml-2 text-xs font-body text-primary/80">(Today)</span>
+                            <span className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
                           )}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        {isToday && timeRemaining && (
-                          <span className="text-xs font-body text-foreground bg-primary/20 px-2 py-1 rounded-full">
-                            {formatTimeRemaining()}
+                          <div className="flex items-center gap-2">
+                            <span className="font-heading font-bold text-foreground">
+                              {item.day}
+                            </span>
+                            {isToday && (
+                              <span className="text-xs font-body text-primary font-medium">(Today)</span>
+                            )}
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          {isToday && timeRemaining && (
+                            <span className="text-xs font-body text-foreground/80 bg-primary/20 px-3 py-1.5 rounded-full font-medium">
+                              {formatTimeRemaining()}
+                            </span>
+                          )}
+                          <span className={`font-body font-medium ${isClosed ? "text-muted-foreground" : isToday ? "text-primary" : "text-foreground/80"}`}>
+                            {item.hours}
                           </span>
-                        )}
-                        <span className={`font-body text-sm ${isClosed ? "text-muted-foreground" : isToday ? "text-primary font-medium" : "text-foreground"}`}>
-                          {item.hours}
-                        </span>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
-              <p className="text-center mt-4 font-body text-sm text-muted-foreground">
+              <p className="text-center mt-6 font-body text-sm text-muted-foreground">
                 For after-hours emergencies, please call{" "}
                 <a href="tel:7702334668" className="text-primary hover:underline font-semibold">
                   (770) 233-4668
