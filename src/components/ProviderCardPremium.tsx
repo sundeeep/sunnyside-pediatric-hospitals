@@ -139,7 +139,7 @@ const ProviderCardPremium = ({
             />
 
             {/* Content */}
-            <div className="absolute inset-0 flex flex-col p-6">
+            <div className="absolute inset-0 flex flex-col p-6 pt-14">
               {/* Close Button */}
               <button
                 type="button"
@@ -152,18 +152,21 @@ const ProviderCardPremium = ({
                 <X className="w-5 h-5 text-white" />
               </button>
 
-              {/* Scrollable Content */}
+              {/* Scrollable Bio Content */}
               <div
-                className="flex-1 overflow-y-auto flex flex-col items-center justify-center [&::-webkit-scrollbar]:hidden"
+                className="flex-1 overflow-y-auto flex items-center justify-center [&::-webkit-scrollbar]:hidden"
                 style={{ scrollbarWidth: "none" }}
               >
                 <p className="font-body text-base text-white leading-relaxed text-center max-w-sm drop-shadow-lg">
                   {bio}
                 </p>
+              </div>
 
+              {/* Sticky Book Appointment Button */}
+              <div className="shrink-0 pt-4">
                 <Button
                   variant="hero"
-                  className="mt-6 w-full max-w-xs shrink-0"
+                  className="w-full"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <Calendar className="w-4 h-4 mr-2" />
