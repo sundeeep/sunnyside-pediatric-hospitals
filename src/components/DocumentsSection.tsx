@@ -1,20 +1,17 @@
 import { FileText, TestTube2, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import SectionHeader from "@/components/SectionHeader";
 
 const DocumentsSection = () => {
   return (
-    <section id="documents" className="py-16 bg-cream-dark">
-      <div className="container mx-auto">
+    <section id="documents" className="py-16 md:py-24 bg-cream-dark">
+      <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <h2 className="font-heading text-2xl md:text-3xl text-foreground mb-2">
-              Patient Portal
-            </h2>
-            <p className="font-body text-muted-foreground">
-              Access your health information securely online
-            </p>
-          </div>
+          <SectionHeader
+            badge="Patient Resources"
+            title="Patient Portal"
+            description="Access your health information securely online"
+          />
 
           {/* 3 Column Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

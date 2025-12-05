@@ -1,4 +1,5 @@
 import ProviderCardPremium from "./ProviderCardPremium";
+import SectionHeader from "./SectionHeader";
 import drChandana from "@/assets/providers/dr-chandana-prabhudev.png";
 import drJose from "@/assets/providers/dr-jose-rios.png";
 
@@ -25,17 +26,13 @@ const providers = [
 
 const ProvidersSection = () => {
   return (
-    <section id="providers" className="py-20 bg-cream-dark">
+    <section id="providers" className="py-16 md:py-24 bg-cream-dark">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-14">
-          <h2 className="font-heading text-section-title text-foreground mb-4">
-            Meet Our Providers
-          </h2>
-          <p className="font-body text-body text-muted-foreground max-w-2xl mx-auto">
-            Our dedicated team of pediatric specialists is committed to
-            providing exceptional care for your children.
-          </p>
-        </div>
+        <SectionHeader
+          badge="Our Team"
+          title="Meet Our Providers"
+          description="Our dedicated team of pediatric specialists is committed to providing exceptional care for your children."
+        />
 
         <div className="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto">
           {providers.map((provider, index) => (
