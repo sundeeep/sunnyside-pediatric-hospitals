@@ -155,12 +155,12 @@ const ServiceCardPremium = ({
           </div>
 
           {/* Content */}
-          <div className="absolute inset-[2px] rounded-2xl p-6 flex flex-col bg-cream">
+          <div className="absolute inset-[2px] rounded-2xl p-4 md:p-6 pt-14 flex flex-col bg-cream">
             {/* Close Button */}
             <button
               type="button"
               onClick={() => setIsFlipped(false)}
-              className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110"
+              className="absolute top-3 right-3 md:top-4 md:right-4 w-8 h-8 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 z-10"
               style={{
                 background: "hsl(var(--sun-yellow) / 0.15)",
                 color: "hsl(var(--sun-yellow-dark))",
@@ -170,20 +170,37 @@ const ServiceCardPremium = ({
             </button>
 
             {/* Title */}
-            <h3 className="font-heading text-xl font-bold text-foreground text-center mt-2 mb-4">
+            <h3 className="font-heading text-lg md:text-xl font-bold text-foreground text-center mb-3">
               {title}
             </h3>
 
-            {/* Description */}
-            <div
-              className="flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden"
-              style={{
-                scrollbarWidth: "none",
-              }}
-            >
-              <p className="font-body text-sm text-muted-foreground leading-relaxed text-center">
-                {description}
-              </p>
+            {/* Description with gradient fades */}
+            <div className="flex-1 relative overflow-hidden">
+              {/* Top fade gradient */}
+              <div 
+                className="absolute top-0 left-0 right-0 h-4 z-10 pointer-events-none"
+                style={{
+                  background: "linear-gradient(to bottom, hsl(var(--cream)) 0%, transparent 100%)",
+                }}
+              />
+              
+              {/* Scrollable content */}
+              <div
+                className="h-full overflow-y-auto py-2 [&::-webkit-scrollbar]:hidden"
+                style={{ scrollbarWidth: "none" }}
+              >
+                <p className="font-body text-xs md:text-sm text-muted-foreground leading-relaxed text-center px-1">
+                  {description}
+                </p>
+              </div>
+              
+              {/* Bottom fade gradient */}
+              <div 
+                className="absolute bottom-0 left-0 right-0 h-6 z-10 pointer-events-none"
+                style={{
+                  background: "linear-gradient(to top, hsl(var(--cream)) 0%, transparent 100%)",
+                }}
+              />
             </div>
           </div>
         </div>
