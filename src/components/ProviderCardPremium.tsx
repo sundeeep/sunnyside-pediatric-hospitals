@@ -16,28 +16,14 @@ interface ProviderCardPremiumProps {
 const ProviderCardPremium = ({
   name,
   credentials,
-  specialty,
   department,
   bio,
   image,
   accentColor,
   index = 0,
 }: ProviderCardPremiumProps) => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
-    setMousePosition({ x, y });
-  };
-
-  const handleMouseLeave = () => {
-    setMousePosition({ x: 0, y: 0 });
-    setIsHovered(false);
-  };
 
   const accentVar = accentColor === "primary" ? "--sun-yellow" : "--sky-blue";
   const accentLightVar = accentColor === "primary" ? "--sun-yellow-light" : "--sky-blue-light";
@@ -48,215 +34,154 @@ const ProviderCardPremium = ({
       style={{
         animationDelay: `${0.1 + index * 0.15}s`,
         animationFillMode: "forwards",
-        perspective: "1200px",
       }}
-      onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <div
-        className="relative w-full h-full transition-all duration-500 ease-out"
-        style={{
-          transformStyle: "preserve-3d",
-          transform: `
-            rotateX(${isHovered && !isDetailOpen ? -mousePosition.y * 0.5 : 0}deg) 
-            rotateY(${isHovered && !isDetailOpen ? mousePosition.x * 0.5 : 0}deg)
-            translateZ(${isHovered ? 20 : 0}px)
-          `,
-        }}
-      >
+      <div className="relative w-full h-full">
         {/* Main Card */}
         <div className="absolute inset-0 rounded-2xl overflow-hidden">
-          {/* Sun Ray Border Effect */}
+          {/* Border */}
           <div
-            className="absolute inset-0 rounded-2xl p-[2px] z-10"
+            className="absolute inset-0 rounded-2xl p-[2px] transition-opacity duration-300"
             style={{
-              background: `conic-gradient(
-                from ${isHovered ? 180 + mousePosition.x * 3 : 180}deg at 50% 0%,
-                hsl(var(${accentVar})) 0deg,
-                hsl(var(${accentLightVar})) 60deg,
-                hsl(var(--sky-blue-light)) 120deg,
-                hsl(var(--sky-blue)) 180deg,
-                hsl(var(--sky-blue-light)) 240deg,
-                hsl(var(${accentLightVar})) 300deg,
-                hsl(var(${accentVar})) 360deg
-              )`,
+              background: `linear-gradient(135deg, hsl(var(${accentVar})) 0%, hsl(var(${accentLightVar})) 50%, hsl(var(--sky-blue-light)) 100%)`,
               opacity: isHovered ? 1 : 0.7,
-              transition: "opacity 0.3s ease",
             }}
           >
             <div className="w-full h-full rounded-2xl bg-card" />
           </div>
 
-          {/* Main Content */}
-          <div className="absolute inset-[2px] rounded-2xl overflow-hidden z-20">
-            {/* Doctor Image - Full Cover */}
+          {/* Image Container */}
+          <div className="absolute inset-[2px] rounded-2xl overflow-hidden">
             <img
               src={image}
               alt={name}
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out"
+              className="w-full h-full object-cover transition-transform duration-500"
+              style={{ transform: isHovered ? "scale(1.05)" : "scale(1)" }}
+            />
+
+            {/* Dark gradient overlay */}
+            <div
+              className="absolute inset-0 pointer-events-none"
               style={{
-                transform: `scale(${isHovered ? 1.05 : 1})`,
+                background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 40%, transparent 100%)",
               }}
             />
 
-            {/* Glassy Overlay Gradient */}
+            {/* Bottom Info Panel */}
             <div
-              className="absolute inset-0 transition-opacity duration-300"
+              className="absolute bottom-0 left-0 right-0 p-5 transition-all duration-300"
               style={{
-                background: `linear-gradient(
-                  to top,
-                  hsl(0 0% 0% / 0.8) 0%,
-                  hsl(0 0% 0% / 0.4) 30%,
-                  hsl(0 0% 0% / 0.1) 60%,
-                  transparent 100%
-                )`,
-              }}
-            />
-
-            {/* Glassy Bottom Panel with Info */}
-            <div
-              className="absolute bottom-0 left-0 right-0 p-5 transition-all duration-300 z-40"
-              style={{
-                background: isHovered
-                  ? "hsl(0 0% 100% / 0.18)"
-                  : "hsl(0 0% 100% / 0.12)",
-                backdropFilter: "blur(16px) saturate(180%)",
-                WebkitBackdropFilter: "blur(16px) saturate(180%)",
+                background: isHovered ? "rgba(255,255,255,0.15)" : "rgba(255,255,255,0.1)",
+                backdropFilter: "blur(16px)",
+                WebkitBackdropFilter: "blur(16px)",
               }}
             >
-              {/* Sun Glow Effect */}
-              <div
-                className="absolute -top-8 left-1/2 -translate-x-1/2 w-32 h-8 transition-opacity duration-300 pointer-events-none"
-                style={{
-                  background: `radial-gradient(ellipse at center, hsl(var(${accentVar}) / ${isHovered ? 0.5 : 0.3}) 0%, transparent 70%)`,
-                }}
-              />
-
               <div className="flex items-center justify-between mb-1">
-                <h3 className="font-heading text-xl font-bold text-white drop-shadow-lg">
+                <h3 className="font-heading text-xl font-bold text-white">
                   {name}
                 </h3>
+                
+                {/* More Button */}
                 <button
+                  type="button"
                   onClick={() => setIsDetailOpen(true)}
-                  className="relative z-50 font-body text-sm font-medium transition-all duration-300 hover:underline cursor-pointer"
-                  style={{ color: `hsl(var(${accentVar}))` }}
+                  className="group shrink-0 cursor-pointer"
                 >
-                  more
+                  <span
+                    className="font-body text-sm font-medium relative inline-block"
+                    style={{ color: `hsl(var(${accentVar}))` }}
+                  >
+                    more
+                    <span
+                      className="absolute bottom-0 left-0 w-full h-[1px] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+                      style={{ backgroundColor: `hsl(var(${accentVar}))` }}
+                    />
+                  </span>
                 </button>
               </div>
+              
               <p
-                className="font-body text-sm font-semibold drop-shadow-md mb-1"
+                className="font-body text-sm font-semibold mb-1"
                 style={{ color: `hsl(var(${accentVar}))` }}
               >
                 {credentials}
               </p>
-              <p className="font-body text-sm text-white/80 drop-shadow-md">
+              <p className="font-body text-sm text-white/80">
                 {department}
               </p>
             </div>
           </div>
-
-          {/* Shimmer Effect */}
-          <div
-            className="absolute inset-0 rounded-2xl z-30 pointer-events-none transition-opacity duration-300"
-            style={{
-              background: `linear-gradient(
-                ${105 + mousePosition.x * 2}deg,
-                transparent 40%,
-                hsl(0 0% 100% / ${isHovered ? 0.15 : 0}) 50%,
-                transparent 60%
-              )`,
-              opacity: isHovered ? 1 : 0,
-            }}
-          />
         </div>
 
-        {/* Bottom Sheet Overlay - Blurred Image with Bio */}
-        <div
-          className={`absolute inset-0 rounded-2xl z-40 transition-all duration-500 ease-out overflow-hidden ${
-            isDetailOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-          }`}
-          onClick={() => setIsDetailOpen(false)}
-        >
-          {/* Doctor Image Background */}
-          <img
-            src={image}
-            alt={name}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          
-          {/* Blur Overlay */}
+        {/* Detail Overlay */}
+        {isDetailOpen && (
           <div
-            className="absolute inset-0"
-            style={{
-              backdropFilter: isDetailOpen ? "blur(12px)" : "blur(0px)",
-              WebkitBackdropFilter: isDetailOpen ? "blur(12px)" : "blur(0px)",
-              background: "hsl(0 0% 0% / 0.5)",
-            }}
-          />
-
-          {/* Bio Content on Blurred Image */}
-          <div className="absolute inset-0 flex flex-col p-6">
-            {/* Close Button - Fixed at top */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsDetailOpen(false);
+            className="absolute inset-0 rounded-2xl overflow-hidden"
+            onClick={() => setIsDetailOpen(false)}
+          >
+            {/* Background Image */}
+            <img
+              src={image}
+              alt={name}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            
+            {/* Blur Overlay */}
+            <div
+              className="absolute inset-0"
+              style={{
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
+                background: "rgba(0,0,0,0.5)",
               }}
-              className="absolute top-4 right-4 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors z-10"
-            >
-              <X className="w-5 h-5 text-white" />
-            </button>
+            />
 
-            {/* Scrollable Content Area */}
-            <div 
-              className="flex-1 overflow-y-auto flex flex-col items-center justify-center [&::-webkit-scrollbar]:hidden"
-              style={{ scrollbarWidth: "none" }}
-            >
-              {/* Bio Paragraph */}
-              <p 
-                className={`font-body text-base text-white leading-relaxed text-center max-w-sm transition-all duration-700 drop-shadow-lg ${
-                  isDetailOpen 
-                    ? "opacity-100 translate-y-0" 
-                    : "opacity-0 translate-y-4"
-                }`}
-                style={{
-                  transitionDelay: isDetailOpen ? "0.2s" : "0s",
-                  textShadow: "0 2px 8px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3)",
+            {/* Content */}
+            <div className="absolute inset-0 flex flex-col p-6">
+              {/* Close Button */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsDetailOpen(false);
                 }}
+                className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center cursor-pointer transition-colors bg-white/20 hover:bg-white/30"
               >
-                {bio}
-              </p>
+                <X className="w-5 h-5 text-white" />
+              </button>
 
-              {/* Book Appointment Button */}
-              <Button
-                variant="hero"
-                className={`mt-6 w-full max-w-xs shrink-0 transition-all duration-700 ${
-                  isDetailOpen 
-                    ? "opacity-100 translate-y-0" 
-                    : "opacity-0 translate-y-4"
-                }`}
-                style={{
-                  transitionDelay: isDetailOpen ? "0.4s" : "0s",
-                }}
-                onClick={(e) => e.stopPropagation()}
+              {/* Scrollable Content */}
+              <div
+                className="flex-1 overflow-y-auto flex flex-col items-center justify-center [&::-webkit-scrollbar]:hidden"
+                style={{ scrollbarWidth: "none" }}
               >
-                <Calendar className="w-4 h-4 mr-2" />
-                Book Appointment
-              </Button>
+                <p className="font-body text-base text-white leading-relaxed text-center max-w-sm drop-shadow-lg">
+                  {bio}
+                </p>
+
+                <Button
+                  variant="hero"
+                  className="mt-6 w-full max-w-xs shrink-0"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <Calendar className="w-4 h-4 mr-2" />
+                  Book Appointment
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
-        {/* Hover Shadow */}
+        {/* Shadow */}
         <div
-          className="absolute inset-0 rounded-2xl -z-10 transition-all duration-500"
+          className="absolute inset-0 rounded-2xl -z-10 transition-all duration-300"
           style={{
             boxShadow: isHovered
-              ? `0 25px 50px -12px hsl(var(${accentVar}) / 0.25), 0 12px 25px -8px hsl(0 0% 0% / 0.15)`
-              : `0 10px 30px -10px hsl(0 0% 0% / 0.1)`,
-            transform: `translateY(${isHovered ? 8 : 0}px)`,
+              ? `0 20px 40px -12px hsl(var(${accentVar}) / 0.2), 0 8px 20px -8px rgba(0,0,0,0.1)`
+              : "0 8px 24px -8px rgba(0,0,0,0.08)",
+            transform: isHovered ? "translateY(6px)" : "translateY(0)",
           }}
         />
       </div>
