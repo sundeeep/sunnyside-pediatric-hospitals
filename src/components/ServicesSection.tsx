@@ -1,4 +1,5 @@
 import ServiceCardPremium from "@/components/ServiceCardPremium";
+import SectionHeader from "@/components/SectionHeader";
 import primaryCareImage from "@/assets/services/primary-care.png";
 import newbornCareImage from "@/assets/services/newborn-care.png";
 import wellChecksImage from "@/assets/services/well-checks.png";
@@ -96,17 +97,13 @@ const services = [
 
 const ServicesSection = () => {
   return (
-    <section id="services" className="py-20 bg-background">
+    <section id="services" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-14">
-          <h2 className="font-heading text-section-title text-foreground mb-4">
-            Our Services
-          </h2>
-          <p className="font-body text-body text-muted-foreground max-w-2xl mx-auto">
-            Comprehensive pediatric services designed to support your child's
-            health at every stage.
-          </p>
-        </div>
+        <SectionHeader
+          badge="What We Offer"
+          title="Our Services"
+          description="Comprehensive pediatric services designed to support your child's health at every stage."
+        />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {services.map((service, index) => (
