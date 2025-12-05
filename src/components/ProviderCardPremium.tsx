@@ -128,13 +128,11 @@ const ProviderCardPremium = ({
               className="absolute inset-0 w-full h-full object-cover"
             />
             
-            {/* Blur Overlay */}
+            {/* Dark Overlay - No blur */}
             <div
               className="absolute inset-0"
               style={{
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
-                background: "rgba(0,0,0,0.5)",
+                background: "rgba(0,0,0,0.6)",
               }}
             />
 
@@ -158,7 +156,7 @@ const ProviderCardPremium = ({
                 <div 
                   className="absolute top-0 left-0 right-0 h-6 z-10 pointer-events-none"
                   style={{
-                    background: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 100%)",
+                    background: "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%)",
                   }}
                 />
                 
@@ -176,7 +174,7 @@ const ProviderCardPremium = ({
                 <div 
                   className="absolute bottom-0 left-0 right-0 h-8 z-10 pointer-events-none"
                   style={{
-                    background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%)",
+                    background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)",
                   }}
                 />
               </div>
