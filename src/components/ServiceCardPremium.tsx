@@ -101,23 +101,23 @@ const ServiceCardPremium = ({
               }}
             />
 
-            {/* Top-Left Yellow Glowing Capsule - Visible by default, hidden on hover */}
+            {/* Bottom-Left Yellow Glowing Capsule - Visible by default, hidden on hover */}
             <div 
-              className="absolute top-4 left-4 z-30 transition-all duration-300 ease-out"
+              className="absolute bottom-4 left-4 z-30 transition-all duration-300 ease-out"
               style={{
                 opacity: isHovered ? 0 : 1,
-                transform: `translateY(${isHovered ? -10 : 0}px)`,
+                transform: `translateY(${isHovered ? 10 : 0}px)`,
               }}
             >
               <div 
-                className="px-4 py-2 rounded-full"
+                className="px-3 py-1.5 rounded-full"
                 style={{
                   background: `linear-gradient(135deg, hsl(var(--sun-yellow)) 0%, hsl(var(--sun-yellow-light)) 100%)`,
-                  boxShadow: "0 4px 20px -2px hsl(var(--sun-yellow) / 0.5), 0 0 30px -5px hsl(var(--sun-yellow) / 0.3)",
+                  boxShadow: "0 3px 15px -2px hsl(var(--sun-yellow) / 0.5), 0 0 20px -5px hsl(var(--sun-yellow) / 0.3)",
                   border: "1px solid hsl(var(--sun-yellow-light) / 0.5)",
                 }}
               >
-                <span className="font-heading text-sm font-semibold text-foreground">
+                <span className="font-heading text-xs font-semibold text-foreground">
                   {title}
                 </span>
               </div>
