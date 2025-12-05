@@ -162,32 +162,24 @@ const ServiceCardPremium = ({
                   }}
                 />
                 
-                <h3 className="font-heading text-lg font-bold text-white mb-1 drop-shadow-lg">
-                  {title}
-                </h3>
-                <p className="font-body text-sm text-white/80 drop-shadow-md mb-3">
+                <div className="flex items-start justify-between gap-4">
+                  <h3 className="font-heading text-lg font-bold text-white drop-shadow-lg">
+                    {title}
+                  </h3>
+                  {/* More Link */}
+                  <button
+                    onClick={handleMoreClick}
+                    className="font-body text-sm font-medium cursor-pointer transition-all duration-300 hover:opacity-80 relative z-50 shrink-0"
+                    style={{
+                      color: "hsl(var(--sun-yellow))",
+                    }}
+                  >
+                    more
+                  </button>
+                </div>
+                <p className="font-body text-sm text-white/80 drop-shadow-md">
                   {tagline}
                 </p>
-
-                {/* Yellow More Button */}
-                <button
-                  onClick={handleMoreClick}
-                  className="group inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full font-body text-sm font-medium cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95 relative z-50"
-                  style={{
-                    background: `linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--sun-yellow-light)) 100%)`,
-                    boxShadow: "0 4px 12px -2px hsl(var(--sun-yellow) / 0.4)",
-                  }}
-                >
-                  <span className="text-primary-foreground">More</span>
-                  <svg 
-                    className="w-4 h-4 text-primary-foreground transition-transform duration-300 group-hover:translate-x-0.5" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
               </div>
             </div>
           </div>
