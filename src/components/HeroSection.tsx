@@ -59,7 +59,7 @@ const HeroSection = () => {
               <Calendar className="w-5 h-5" />
               Book Appointment
             </Button>
-            <Button variant="heroOutline" size="lg">
+            <Button variant="heroOutline" size="lg" onClick={() => document.getElementById('providers')?.scrollIntoView({ behavior: 'smooth' })}>
               <Users className="w-5 h-5" />
               Meet Our Providers
             </Button>
